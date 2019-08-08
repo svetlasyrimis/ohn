@@ -58,6 +58,8 @@ React.js, Ruby on Rails
 
 ## Routes
 
+![](https://media1.giphy.com/media/xT9IgEJTULuuOKT7uU/giphy.gif)
+
 ## Wireframes
 
 ![](assets/mobile.png)
