@@ -87,7 +87,7 @@ React.js, Ruby on Rails
 ## Time Estimates(Front End)
 
 | Component 	  | Priority       | Estimated Time | Time Invested   | Actual Time    |
-| :---         |     :---:      |          :---: |      :---:      |      ---:   |   |
+| :---         |     :---:      |          :---: |      :---:      |      ---:   |   
 | LoginForm    | high  			  |  3h   	         |TBD              | TBD            |
 | Logout   |      high 			|      30min           |TBD              | TBD            |
 | RegisterForm  |  high  		 | 3h   |TBD              | TBD            |
