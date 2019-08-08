@@ -1,4 +1,6 @@
-# OHN
+# OHN 
+
+![](assets/logo.png) 
 
 ### Project Overview:
 
