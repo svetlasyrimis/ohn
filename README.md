@@ -18,7 +18,7 @@ DreamMaker is a crowdsourcing, multidisciplinary app that connects individuals w
 
 * Auth - register, login, logout
 
-* User dashboard(Projects)
+* User dashboard(Projects, that a user is part of or has created)
 
 * User Profile (Skills and Interests) - Create, Update ,Read
 
@@ -29,7 +29,7 @@ DreamMaker is a crowdsourcing, multidisciplinary app that connects individuals w
  
 ### Stretch Goals 
 
-* Send email to user 
+* Send email to user once project tasks are all completed.
 * Upload pictures 
 * Animations
  
@@ -56,7 +56,7 @@ React.js, Ruby on Rails
 
 ## ERD
 
-![](assets/DreamMaker.jpeg) 
+![](assets/DreamMaker (2).jpeg) 
 
 ## Routes
 
@@ -64,8 +64,12 @@ React.js, Ruby on Rails
 
 ## Wireframes
 
+### Mobile
 ![](assets/mobile.png)
+### Tablet
 ![](assets/tablet.png)
+### Desktop
+![](assets/desktop.png)
 
 ## React Component Heirarchy 
 
@@ -77,11 +81,10 @@ React.js, Ruby on Rails
 | Nav       | Renders the nav bar and logout button. |
 | RegisterForm  | This component will render a register form. |    
 | LoginForm     | This component will render a login form.     |            
-| Login         | This component contains login form functionality.    |
 | Dashboard         | This component will render a welcome screen view with ProjectButtons component |    	           
 | UserProjects     | This component will render a list of user's projects  and ProjectButtons component  | 		           
 | ProjectSummary    | This component will the details of a project.   |    	           
-| CreateProjectForm  | This component will render a input text fields for creating a project   | 
+| ProjectForm  | This component will render a input text fields for creating a project   | 
 | Task    | This component will render a list of tasks that belongs to a project    | 
 | TaskForm      | This component will render the task form |
 |  ProjectButtons	| This component will render StartProject and JoinProject buttons|
@@ -97,8 +100,8 @@ React.js, Ruby on Rails
 | RegisterForm  |  high  		 | 3h   |TBD              | TBD            |
 | Dashboard    |  high     			| 3.5h     |TBD              | TBD            |
 | UserProjects   |  low  				| 4h  |TBD              | TBD            |
-| ProjectSummary     |    low   		| 2.5h      |TBD              | TBD            |
-| CreateProjectForm   |   high 			|   1h  |TBD              | TBD            |
+| ProjectSummary     |    high   		| 2.5h      |TBD              | TBD            |
+| ProjectForm   |   high 			|   1h  |TBD              | TBD            |
 | Task    |    low    	|   1h    |TBD              | TBD            |
 | ProjectButtons   |   high   	|    2h  |      TBD    |     TBD      |               |
 | Total      |     -     |    -    |      20h     |     TBD      |               |
