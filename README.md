@@ -58,6 +58,80 @@ React.js, Ruby on Rails
 
 ![](assets/DreamMaker (2).jpeg) 
 
+## Sample test(user associations)
+```
+{
+  "id": 1,
+  "name": "Svet",
+  "email": "svetla@example.com",
+  "password": "svet",
+  "created_at": "2019-08-08T21:06:28.599Z",
+  "updated_at": "2019-08-08T21:06:28.599Z",
+  "skills": [
+    {
+      "id": 1,
+      "name": "dancing",
+      "user_id": 1,
+      "created_at": "2019-08-08T21:06:28.673Z",
+      "updated_at": "2019-08-08T21:06:28.673Z"
+    },
+    {
+      "id": 2,
+      "name": "coding",
+      "user_id": 1,
+      "created_at": "2019-08-08T21:06:28.677Z",
+      "updated_at": "2019-08-08T21:06:28.677Z"
+    }
+  ],
+  "interests": [
+    {
+      "id": 1,
+      "name": "Crossfit",
+      "user_id": 1,
+      "created_at": "2019-08-08T21:06:28.692Z",
+      "updated_at": "2019-08-08T21:06:28.692Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "General Assembly",
+      "description": "Action figure",
+      "user_id": 1,
+      "task_id": null,
+      "created_at": "2019-08-08T21:06:28.636Z",
+      "updated_at": "2019-08-08T21:06:28.636Z",
+      "tasks": [
+        {
+          "id": 1,
+          "name": "Casting",
+          "project_id": 1,
+          "created_at": "2019-08-08T21:06:28.652Z",
+          "updated_at": "2019-08-08T21:06:28.652Z"
+        },
+        {
+          "id": 2,
+          "name": "Molding",
+          "project_id": 1,
+          "created_at": "2019-08-08T21:06:28.657Z",
+          "updated_at": "2019-08-08T21:06:28.657Z"
+        }
+      ],
+      "users": [
+        {
+          "id": 2,
+          "name": "George",
+          "email": "george@gmail.com",
+          "password": "george",
+          "created_at": "2019-08-08T21:06:28.697Z",
+          "updated_at": "2019-08-08T21:06:28.697Z"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Routes
 
 ![](https://media1.giphy.com/media/xT9IgEJTULuuOKT7uU/giphy.gif)
