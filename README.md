@@ -56,7 +56,7 @@ React.js, Ruby on Rails
 
 ## ERD
 
-![](assets/DreamMaker (2).jpeg) 
+![](assets/DreamMakerFinal.jpeg) 
 
 
 ## Sample test(user associations)
