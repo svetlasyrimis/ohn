@@ -137,6 +137,17 @@ React.js, Ruby on Rails
 
 ![](https://media1.giphy.com/media/xT9IgEJTULuuOKT7uU/giphy.gif)
 
+```
+resources :users do 
+    resources :projects do
+      resources :tasks
+    end
+    resources :skills
+    resources :interests
+end 
+```
+
+
 ## Wireframes
 
 ### Mobile
