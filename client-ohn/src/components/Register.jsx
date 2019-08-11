@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 // This component handles our register form
 const Register = (props) => {
@@ -16,6 +17,7 @@ const Register = (props) => {
         <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} />
         <hr/>
         <input type="submit" value="Register"></input>
+        <Link to="/">Login</Link>
       </form>
     </div>
   );
