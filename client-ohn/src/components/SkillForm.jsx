@@ -60,7 +60,8 @@ export default class Skills extends React.Component {
                  <input type="submit" value="Add a skill" />
             
         </form>
-        <SkillList skills={this.props.skills} handleDelete={this.props.handleDelete}/>
+        <SkillList skills={this.props.skills} handleDelete={this.props.handleDelete} />
+        <Link to='/dashboard'>Back</Link>
         </>
        
     )

@@ -9,6 +9,6 @@ class User < ApplicationRecord
   has_many :interests
   has_many :skills
   has_many :collaborators
-  has_many :projects, :through => :collaborators
+  has_many :projects, through: :collaborators
 
 end

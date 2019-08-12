@@ -7,6 +7,9 @@ import Skills from './components/SkillForm'
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Test from './components/Test'
+import Projects from './components/ProjectForm'
+
 
 import {
   loginUser,
@@ -162,7 +165,19 @@ class App extends React.Component {
               handleDelete={this.handleDeleteSkill}
               
             />
-          )} />
+            )} />
+          <Route exact path="/test" render={Test} />
+          <Route exact path="/projects" render={(props) => (
+            <Projects
+            
+              currentUser={this.state.currentUser}
+              handleSubmit={this.handleCreateSkill}
+              handleChange={this.handleChange}
+              
+             
+              
+            />
+            )}/>
           </>
         }
         

@@ -11,8 +11,11 @@ const Dashboard = props => {
         
         <p>Hey this is your dashboard
           welcome {props.currentUser.username}
+         
           <br />
-          <Link to='/skills'>Create New Skill</Link>
+          <Link to='/skills'>Create new skill</Link>
+          <Link to='/test'>Test</Link>
+          <Link to='/projects'>Project</Link>
         </p>
        
       </div>
