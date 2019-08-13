@@ -1,19 +1,22 @@
-import React, { Component } from 'react'
-import {Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom';
 import SkillList from './SkillList'
+import { getSkills } from '../services/skill'
 
 
 export default class Skills extends React.Component {
   
-    constructor(props) {
+  constructor(props) {
+      // debugger
       super(props);
       this.state = {
         name: '',
         skills: this.props.skills,
         
       };
-      console.log(props)
+      console.log(this.state.skills)
     }
+  
   
   handleChange = ev => {
     const { name, value } = ev.target;
@@ -38,8 +41,12 @@ export default class Skills extends React.Component {
   // async componentDidMount() {
   //   const { id } = this.props.currentUser;
   //   const skills = await getSkills(id)
-  //   console.log(skills)
-    
+  //   this.state = {
+  //     name: '',
+  //     skills: skills,
+      
+  //   };
+  //   console.log(this.state.skills)
   // }
   
 

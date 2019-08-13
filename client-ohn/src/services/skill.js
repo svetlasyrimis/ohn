@@ -7,6 +7,7 @@ export const createSkill = async (userId, data) => {
 
 export const getSkills = async (userId) => {
   const resp = await api.get(`/users/${userId}/skills`);
+  
   return resp.data
 }
 

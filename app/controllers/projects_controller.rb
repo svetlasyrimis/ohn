@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show update destroy]
-  before_action :authorize_request
-  
+  before_action :set_project, only: %i[show update destroy add_collaborator]
+  before_action :authorize_request 
+  # before_action :authorize_request, except: %i[index show]
+
   def index
-    @project = Project.order(:id)
-    render json: @project
+    @projects = Project.all
+    render json: @projects, include: {collaborators: {include: [:user]} }
   end
 
   
@@ -12,21 +13,24 @@ class ProjectsController < ApplicationController
     render json: @project
   end
 
-  def create 
-    @project = Project.new(project_params)
-    @project.save
-  end 
-  # def create
+  # def create 
   #   @project = Project.new(project_params)
-  #   # @project.users.add(User.find(current_user.id))
-  #   # user = User.find(params[:user_id]) user.events << Event.new(params[:event])
-  #   if @project.save
-  #     render json: @project, status: :created
-
-  #   else
-  #     render json: @project.errors, status: :unprocessable_entity
-  #   end
-  # end
+  #   @project.save
+  # end 
+  def create
+    @project = Project.new(project_params)    
+    if @project.save
+      @collaborator = Collaborator.new(user: @current_user, project: @project)
+      @collaborator.save
+      render json: @project, include: {collaborators: {include: [:user]} }, status: :created
+    end 
+  end
+  
+  def add_collaborator 
+    @collaborator = Collaborator.new(user: @current_user, project: @project, isOwner:false)
+    @collaborator.save
+    render json: @project, include: :collaborators, status: :created
+  end
 
   
   def update
@@ -52,7 +56,7 @@ class ProjectsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def project_params
-    params.require(:project).permit(:name,:description,:user_id)
+    params.require(:project).permit(:name,:description)
     # accepts_nested_attributes_for :users
   end
 

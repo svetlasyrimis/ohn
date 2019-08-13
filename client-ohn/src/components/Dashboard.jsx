@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -13,8 +13,8 @@ const Dashboard = props => {
           welcome {props.currentUser.username}
          
           <br />
-          <Link to='/skills'>Create new skill</Link>
-          <Link to='/test'>Test</Link>
+          <Link to='/skills'>Skills</Link>
+          <Link to='/interests'>Interests</Link>
           <Link to='/projects'>Project</Link>
         </p>
        
