@@ -16,7 +16,7 @@ class SkillsController < ApplicationController
   def create
     @skill = Skill.new(skill_params)
     if @skill.save
-      render json: @skill, status: :created
+      render json: @skill ,:only => [ :id, :name, :user_id ], status: :created
     else
       render json: @skill.errors, status: :unprocessable_entity
     end
