@@ -16,3 +16,8 @@ export const deleteProject = async (id) => {
   const resp = await api.delete(`/projects/${id}`);
   return resp.data
 }
+
+export const showProject = async (id) => {
+  const resp = await api.get(`/projects/${id}`)
+  return resp.data
+}

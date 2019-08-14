@@ -16,13 +16,7 @@ class Project extends React.Component {
     }
   }
 
-  // async componentDidMount() {
-  //   const projects = await getProjects()
-  //   this.setState({
-  //     projects: projects
-  //   })
-  //   console.log(this.state.projects)
-  // }
+  
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState => ({

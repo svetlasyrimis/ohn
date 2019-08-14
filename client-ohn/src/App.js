@@ -4,12 +4,12 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Nav from './components/Nav'
 import Skills from './components/SkillForm'
-import { Route,Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/ProjectForm'
 import Interests from './components/Interests'
-
+import ProjectCard from './components/ProjectCard'
 import {
   loginUser,
   registerUser,
@@ -50,7 +50,7 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
-      
+
     };
 
   }
@@ -65,7 +65,7 @@ class App extends React.Component {
       // debugger
       const interests = await getInterests(this.state.currentUser.id)
       const projects = await getProjects()
-      
+
       this.setState({
         skills: skills,
         projects: projects,
@@ -75,12 +75,12 @@ class App extends React.Component {
     } else {
       this.props.history.push("/")
     }
-    
-    console.log(this.state.skills)
+
+    // console.log(this.state.skills)
   }
 
 
-  
+
 
   // Auth
 
@@ -134,8 +134,8 @@ class App extends React.Component {
       skills: [skill, ...prevState.skills]
     }))
   }
-  handleDeleteSkill = async (ev) => { 
-    
+  handleDeleteSkill = async (ev) => {
+
     const skillId = ev.target.name
     console.log(ev.target.name)
     await destroySkill(this.state.currentUser.id, skillId);
@@ -144,7 +144,7 @@ class App extends React.Component {
         skill.id !== parseInt(skillId)
       )
     }))
-    
+
   }
   //interest
   handleCreateInterest = async (userId, data) => {
@@ -154,7 +154,7 @@ class App extends React.Component {
       interests: [interest, ...prevState.interests]
     }))
   }
-  handleDeleteInterest = async (ev) => { 
+  handleDeleteInterest = async (ev) => {
     const interestId = ev.target.name
     console.log(ev.target.name)
     await destroyInterest(this.state.currentUser.id, interestId);
@@ -163,34 +163,38 @@ class App extends React.Component {
         interest.id !== parseInt(interestId)
       )
     }))
-    
+
   }
 
   // project 
   handleCreateProject = async (data) => {
     const project = await createProject(data);
-    
+
     console.log(project);
     this.setState(prevState => ({
       projects: [project, ...prevState.projects],
-     
+
     }))
-    
+
   }
 
   handleDeleteProject = async (ev) => {
     const id = ev.target.name
     const resp = await deleteProject(id)
-    
+
     this.setState(prevState => ({
       projects: prevState.projects.filter(project =>
         project.id !== parseInt(id)
       )
     }))
   }
- 
+
+  //task 
+  
+
+
   render() {
-    
+
     return (
       <div className="App">
         {/* <Route exact path="/" render={() => (<Nav />)} /> */}
@@ -203,57 +207,61 @@ class App extends React.Component {
           <Register
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
-              formData={this.state.authFormData} />)} />
-          
+            formData={this.state.authFormData} />)} />
+
         {this.state.currentUser &&
           <>
-          <Nav handleLogout={this.handleLogout} />
-          {/* <Dashboard currentUser={this.state.currentUser} /> */}
-          <p>Hey this is your dashboard
+            <Nav handleLogout={this.handleLogout} />
+            {/* <Dashboard currentUser={this.state.currentUser} /> */}
+            <p>Hey this is your dashboard
           welcome {this.state.currentUser.username}</p>
-          <Link to='/skills'>Skills</Link>
-          <Link to='/projects'>Project</Link>
-          <Link to='/interests'>Interests</Link>
-          <Route
-          exact
-          path="/skills" 
-          render={(props) => (
-            <Skills
-              {...props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateSkill}
-              skills={this.state.skills}
-              handleDelete={this.handleDeleteSkill}
-              
-            />
-            
-            )}  />
-        
-          <Route exact path="/projects" render={(props) => (
-            <Projects
-              {...props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateProject}
-              projects={this.state.projects}
-              handleDelete={this.handleDeleteProject}
-             
-              
-            />
-          )} />
-          <Route exact path="/interests" render={(props) => (
-            <Interests
-              {... props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateInterest}
-              interests={this.state.interests}
-              handleDelete={this.handleDeleteInterest}
-             
-              
-            />
-            )}/>
+            <Link to='/skills'>Skills</Link>
+            <Link to='/projects'>Project</Link>
+            <Link to='/interests'>Interests</Link>
+            <Route
+              exact
+              path="/skills"
+              render={(props) => (
+                <Skills
+                  {...props}
+                  currentUser={this.state.currentUser}
+                  handleSubmit={this.handleCreateSkill}
+                  skills={this.state.skills}
+                  handleDelete={this.handleDeleteSkill}
+
+                />
+
+              )} />
+
+            <Route exact path="/projects" render={(props) => (
+              <Projects
+                {...props}
+                currentUser={this.state.currentUser}
+                handleSubmit={this.handleCreateProject}
+                projects={this.state.projects}
+                handleDelete={this.handleDeleteProject}
+
+
+              />
+            )} />
+
+            <Route exact path="/interests" render={(props) => (
+              <Interests
+                {...props}
+                currentUser={this.state.currentUser}
+                handleSubmit={this.handleCreateInterest}
+                interests={this.state.interests}
+                handleDelete={this.handleDeleteInterest}
+
+
+              />
+            )} />
+          <Route exact path="/projects/:project_id" render={(props) => 
+            <ProjectCard id={props.match.params.project_id}  />
+            } />
           </>
         }
-        
+
       </div>
     );
   }
