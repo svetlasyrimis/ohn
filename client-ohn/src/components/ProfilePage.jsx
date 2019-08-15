@@ -1,5 +1,6 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
+import ModalComponent from './ModalComponent';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // var FontAwesome = require('react-fontawesome');
@@ -17,34 +18,24 @@ export default function ProfilePage(props) {
       <div className="skills-and-interests">
         <div className="flex-column user-stuff">
           <p className="bold">Skills</p>
-          <button className="icon" onClick={(e) => {
-            props.showModal(e);
-          }}>Add a new skill<FontAwesome
-            name='plus-square'
-            size='2x'
-            color="blue"
-            className="icon"
-          // spin
-            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-            
-          /></button>
-        {props.skills && props.skills.map(skill => <div key={skill.id}>
-          <p>Skill :{skill.name}</p>
-          
-          <FontAwesome
-          name='trash'
-            size='2x'
-            color="blue"
-            className="garbage icon"
-          // spin
-            style={{ backgroundColor: "red" }}
-            
-          />
-          {/* <FontAwesomeIcon icon={['fal', 'code']} />
+          <ModalComponent currentUser={props.user} handleSubmit={props.handleSubmit} />
+          {props.skills && props.skills.map(skill => <div key={skill.id}>
+            <p>Skill :{skill.name}</p>
+
+            <FontAwesome
+              name='trash'
+              size='2x'
+              color="blue"
+              className="garbage icon"
+              // spin
+              style={{ backgroundColor: "red" }}
+
+            />
+            {/* <FontAwesomeIcon icon={['fal', 'code']} />
           <FontAwesomeIcon icon={faHome} style={{ color: 'red' }} /> */}
-        </div>)}
+          </div>)}
         </div>
-        <br/>
+        <br />
         <div className="flex-column user-stuff">
           <p className="bold">Interests</p>
           <p className="icon" onClick={() => { console.log('logs') }}>Add new<FontAwesome
@@ -52,25 +43,25 @@ export default function ProfilePage(props) {
             size='2x'
             color="blue"
             className="icon"
-          // spin
+            // spin
             style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-            
+
           /></p>
-        {props.interests && props.interests.map(interest => <div key={interest.id}>
-          <p>Interest: {interest.name}</p>
-          
-          <FontAwesome
-          name='trash'
-            size='2x'
-            color="blue"
-            className="garbage icon"
-          // spin
-            style={{ backgroundColor: "red" }}
-            
-          />
-          
-        </div>)}
-          </div>
+          {props.interests && props.interests.map(interest => <div key={interest.id}>
+            <p>Interest: {interest.name}</p>
+
+            <FontAwesome
+              name='trash'
+              size='2x'
+              color="blue"
+              className="garbage icon"
+              // spin
+              style={{ backgroundColor: "red" }}
+
+            />
+
+          </div>)}
+        </div>
       </div>
     </div>
   )

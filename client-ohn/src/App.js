@@ -11,15 +11,11 @@ import Projects from './components/ProjectForm'
 import Interests from './components/Interests'
 import ProjectCard from './components/ProjectCard'
 import Button from 'react-bootstrap/Button';
-// import InputGroup from 'react-bootstrap/InputGroup'
-// import { ModalContainer, ModalRoute } from 'react-router-modal';
+
 import Search from './components/Search'
-// import { Modal,ModalHeader,ModalFooter,ModalBody} from 'react-bootstrap'
-import ModalComponent from './components/ModalComponent'
-// assumes webpack loader for css
-// ... or include this css however you do that in your project ...
+
 import 'react-router-modal/css/react-router-modal.css'
-// import { Modal, ModalDialog, ModalHeader, ModalFooter, ModalBody, ModalTitle } from 'react-bootstrap';
+
 
 import {
   loginUser,
@@ -68,7 +64,7 @@ class App extends React.Component {
     };
 
   }
-  
+
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
@@ -82,9 +78,9 @@ class App extends React.Component {
       const projects = await getProjects()
 
       this.setState({
-        skills: skills,
-        projects: projects,
-        interests: interests
+        skills: this.state.currentUser.skills,
+        projects: this.state.currentUser.projects,
+        interests: this.state.currentUser.interests
       })
       // debugger
     } else {
@@ -278,9 +274,14 @@ class App extends React.Component {
             } />
             <Route exact path="/profile" render={(props) => (
               <ProfilePage
+                {...props}
                 user={this.state.currentUser}
                 interests={this.state.interests}
-                skills={this.state.skills} />)}
+                skills={this.state.skills}
+                handleSubmit={this.handleCreateSkill}
+
+              />)}
+
             />
             <Route exact path="/search" render={(props) => (
               <Search
@@ -288,7 +289,7 @@ class App extends React.Component {
                 interests={this.state.interests}
                 skills={this.state.skills} />)}
             />
-            <ModalComponent />
+            
 
           </>
 
@@ -301,20 +302,5 @@ class App extends React.Component {
 
 export default withRouter(App);
 
-{/* <Modal show={true}>
-          
-          <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
 
-          <Modal.Body>
-            <p>Modal body text goes here.</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save changes</Button>
-          </Modal.Footer>
-        
-        </Modal> */}
 
