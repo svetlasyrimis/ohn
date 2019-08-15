@@ -34,7 +34,7 @@ class InterestsController < ApplicationController
     render json: { message: 'no skill matches that ID' }, status: 404
   end
   def interest_params
-    params.require(:interest).permit(:name,:user_id)
+    params.require(:interest).permit(:name, :user_id)
   end
 
 end

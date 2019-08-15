@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show update destroy add_collaborator]
-  before_action :authorize_request
+  before_action :authorize_request 
   # before_action :authorize_request, except: %i[index show]
 
   def index

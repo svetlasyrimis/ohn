@@ -11,6 +11,22 @@ class ApplicationController < ActionController::API
     HashWithIndifferentAccess.new decoded
   end
 
+  def getUserProjects(user)
+    projects = user.collaborators.map do |collab|
+      if collab.isOwner == true 
+        collab.project
+      end
+    end
+
+    projects.map do |project|
+      { **project.as_json.symbolize_keys, tasks: project.tasks, collaborators: project.collaborators.map do |collab|
+        { **collab.as_json.symbolize_keys, user: collab.user} 
+      end
+      }
+    end
+  end
+
+
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header

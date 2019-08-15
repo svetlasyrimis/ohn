@@ -1,17 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import InterestList from './InterestList'
 
 
-class Interests extends React.Component {
+export default class InterestOnlyForm extends React.Component {
+  
     constructor(props) {
       super(props);
       this.state = {
-        name: '',
-        interests: this.props.interests,
-        
+        name: '', 
       };
-      
     }
   
   handleChange = ev => {
@@ -40,7 +36,7 @@ class Interests extends React.Component {
     return (
       
       <>
-      <h2>Interest</h2>
+      
         <form onSubmit={this.handleInterestSubmit}>
           <label htmlFor="name">Interest</label>
             <input
@@ -49,11 +45,10 @@ class Interests extends React.Component {
               onChange={this.handleChange}
               name="name"
                ></input>
-                 <input type="submit" value="Add an interest" />
+                 <input type="submit" className="btn btn-outline-dark" value="Add an interest" />
             
         </form>
-        <InterestList interests={this.props.interests} handleDelete={this.props.handleDelete} />
-        <Link to='/dashboard'>Back</Link>
+        
         </>
        
     )

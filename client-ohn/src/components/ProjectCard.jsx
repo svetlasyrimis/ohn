@@ -55,7 +55,7 @@ export default class ProjectCard extends React.Component {
     ev.preventDefault();
     const resp = await this.handleCreateTask(this.props.id, this.state.taskName)
     // debugger;
-    console.log(resp.data)
+    
     this.setState({
       taskName: {
         name: ''

@@ -21,15 +21,16 @@ input {
   align-items: center;
 }
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
 }
 .body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 .logo {
-  border-radius: 50%;
+  
   object-fit: cover;
 
 }
@@ -40,11 +41,23 @@ input {
   justify-content: center;
   align-items: center;
 }
-
-.input-description {
+.skills-interests-items {
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: -webkit-fill-available
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+/* .input-description {
   width: 250px;
   height: 150px;
-}
+} */
 br {
   border-bottom:1px dashed black;
   display:block;
@@ -53,9 +66,10 @@ br {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  align-items: self-start
 }
 .user-stuff {
+  display:flex;
   
 }
 .bold {
@@ -130,7 +144,18 @@ input {
   margin:5px;
 }
 
+.bullet-point-icon {
+  width: 30px;
+  height: 30px;
+  align-self: flex-start;
+}
 
+.vertical-hr {  
+  /* border: none; */
+  border-right: 2px solid hsla(200, 10%, 50%,100);
+  height:30vh;
+  margin: -10px;     
+}
 
 /* nav.sidebar {
   -webkit-transition: margin 200ms ease-out;

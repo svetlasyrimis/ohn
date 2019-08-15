@@ -3,15 +3,12 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
-import Skills from './components/SkillForm'
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/ProjectForm'
-import Interests from './components/Interests'
 import ProjectCard from './components/ProjectCard'
 import Button from 'react-bootstrap/Button';
-
 import Search from './components/Search'
 
 import 'react-router-modal/css/react-router-modal.css'
@@ -68,21 +65,16 @@ class App extends React.Component {
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
+      // const projects = await getProjects()
       this.setState({
         currentUser: user,
+        projects: user.projects,
+        skills: user.skills,
+        interests: user.interests
       })
-      console.log(this.state.currentUser)
-      const skills = await getSkills(this.state.currentUser.id)
-      // debugger
-      const interests = await getInterests(this.state.currentUser.id)
-      const projects = await getProjects()
+      // const skills = await getSkills(this.state.currentUser.id)
+      // const interests = await getInterests(this.state.currentUser.id)
 
-      this.setState({
-        skills: this.state.currentUser.skills,
-        projects: this.state.currentUser.projects,
-        interests: this.state.currentUser.interests
-      })
-      // debugger
     } else {
       this.props.history.push("/")
     }
@@ -103,6 +95,8 @@ class App extends React.Component {
     const userData = await loginUser(this.state.authFormData);
     this.setState({
       currentUser: userData,
+      skills: userData.skills,
+      interests: userData.interests,
       isLoggedIn: true
     })
     this.props.history.push("/dashboard")
@@ -191,6 +185,7 @@ class App extends React.Component {
 
   handleDeleteProject = async (ev) => {
     const id = ev.target.name
+    console.log("hey")
     await deleteProject(id)
 
     this.setState(prevState => ({
@@ -231,20 +226,7 @@ class App extends React.Component {
             <Link to='/search'><Button variant="outline-warning">Join a Project</Button></Link>
 
 
-            <Route
-              exact
-              path="/skills"
-              render={(props) => (
-                <Skills
-                  {...props}
-                  currentUser={this.state.currentUser}
-                  handleSubmit={this.handleCreateSkill}
-                  skills={this.state.skills}
-                  handleDelete={this.handleDeleteSkill}
 
-                />
-
-              )} />
 
             <Route exact path="/projects" render={(props) => (
               <Projects
@@ -258,7 +240,7 @@ class App extends React.Component {
               />
             )} />
 
-            <Route exact path="/interests" render={(props) => (
+            {/* <Route exact path="/interests" render={(props) => (
               <Interests
                 {...props}
                 currentUser={this.state.currentUser}
@@ -268,7 +250,7 @@ class App extends React.Component {
 
 
               />
-            )} />
+            )} /> */}
             <Route exact path="/projects/:project_id" render={(props) =>
               <ProjectCard id={props.match.params.project_id} />
             } />
@@ -279,7 +261,9 @@ class App extends React.Component {
                 interests={this.state.interests}
                 skills={this.state.skills}
                 handleSubmit={this.handleCreateSkill}
-
+                handleDelete={this.handleDeleteSkill}
+                handleSubmitInt={this.handleCreateInterest}
+                handleDeleteInt={this.handleDeleteInterest}
               />)}
 
             />
@@ -289,7 +273,7 @@ class App extends React.Component {
                 interests={this.state.interests}
                 skills={this.state.skills} />)}
             />
-            
+
 
           </>
 

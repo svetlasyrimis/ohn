@@ -44,7 +44,8 @@ class UsersController < ApplicationController
       username: @current_user[:username],
       email: @current_user[:email],
       skills: @current_user.skills,
-      interests: @current_user.interests
+      interests: @current_user.interests,
+      projects: getUserProjects(@current_user)
     }
 
     render json: @user

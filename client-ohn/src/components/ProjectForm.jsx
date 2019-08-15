@@ -54,15 +54,15 @@ class Project extends React.Component {
             name="name"
           ></input>
           <label htmlFor="description">Description</label>
-          <input
+          <textarea
             type='text'
             value={this.state.projectData.description}
             onChange={this.handleChange}
             name="description"
-            size="35"
             className="input-description"
+            rows="4" cols="50"
             
-          ></input>
+          ></textarea>
           <input type="submit" value="Create a project" />
 
         </form>
