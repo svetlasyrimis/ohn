@@ -1,12 +1,13 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
-import ModalComponent from './ModalComponent';
+
+import ModalSkill from './ModalSkill';
 import ModalInterest from './ModalInterest'
 import SkillList from './SkillList';
 import InterestList from './InterestList'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // var FontAwesome = require('react-fontawesome');
+// import FontAwesome from 'react-fontawesome'
 
 
 export default function ProfilePage(props) {
@@ -24,7 +25,7 @@ export default function ProfilePage(props) {
         <div className="flex-column user-stuff">
           <p className="bold">Skills</p>
           <hr/>
-          <ModalComponent currentUser={props.user} handleSubmit={props.handleSubmit} />
+          <ModalSkill currentUser={props.user} handleSubmit={props.handleSubmit} />
           <SkillList skills={props.skills} handleDelete={props.handleDelete} />
         </div>
 

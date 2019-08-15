@@ -29,11 +29,7 @@ export default class SkillOnlyForm extends React.Component {
     this.setState({
       name: '',
     });
-
-
   }
-
-
 
   render() {
 

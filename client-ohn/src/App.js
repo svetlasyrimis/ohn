@@ -6,7 +6,7 @@ import Navigation from './components/Navigation'
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Projects from './components/ProjectForm'
+import Projects from './components/Projects'
 import ProjectCard from './components/ProjectCard'
 import Button from 'react-bootstrap/Button';
 import Search from './components/Search'
@@ -21,18 +21,18 @@ import {
 } from './services/api-helper'
 import {
   createSkill,
-  getSkills,
+  // getSkills,
   destroySkill
 } from './services/skill'
 
 import {
-  getProjects,
+  // getProjects,
   deleteProject,
   createProject
 } from './services/project'
 import './App.css';
 import {
-  getInterests,
+  // getInterests,
   destroyInterest,
   createInterest
 } from './services/interest';
@@ -97,8 +97,11 @@ class App extends React.Component {
       currentUser: userData,
       skills: userData.skills,
       interests: userData.interests,
+      projects: userData.projects,
+      
       isLoggedIn: true
     })
+    
     this.props.history.push("/dashboard")
   }
   handleChange = ev => {

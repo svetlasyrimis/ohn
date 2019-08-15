@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, Button } from 'react-bootstrap';
-import SkillOnlyForm from "./SkillOnlyForm";
+import ProjectOnlyForm from "./ProjectOnlyForm";
 
-export default function ModalComponent(props) {
+export default function ModalProject(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -11,18 +11,16 @@ export default function ModalComponent(props) {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Add new skill
+        Add new project
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>New Skill</Modal.Title>
+          <Modal.Title>New Project</Modal.Title>
         </Modal.Header>
-        <Modal.Body><SkillOnlyForm currentUser={props.currentUser} handleSubmit={props.handleSubmit}/></Modal.Body>
+        <Modal.Body><ProjectOnlyForm currentUser={props.currentUser} handleSubmit={props.handleSubmit}/></Modal.Body>
         
       </Modal>
     </>
   );
 }
-
-

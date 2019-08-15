@@ -1,29 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import ReactCardFlip from 'react-card-flip';
+import ProjectCardFront from './ProjectCardFront'
 
 const ProjectList = props => {
-  //debugger
+
   return (
     <>
       {props.projects && props.projects.map(project =>
-        <div key={project.id}>
-          <hr />
-          <p>Your Projects</p>
-          <h1>Project id : {project.id}</h1>
-          <h2>Project name : {project.name}</h2>
-          <p>Description {project.description}</p>
-          <p>Collaborators:</p>
-          {project.collaborators.map(collaborator => (
-            <div key={collaborator.id}>
-              <p>{collaborator.user.username}</p>
-            </div>
-          ))
-          }
-          <button name={project.id} onClick={props.handleDelete}>Delete a project</button>
-          <Link to={`/projects/${parseInt(project.id)}`}>See More</Link>
 
-        </div>)}
+        (<div key={project.id}>
+          {/* <ProjectCardFront handleDelete={props.handleDelete} project={project} /> */}
+
+          <ReactCardFlip isFlipped={props.isFlipped} flipDirection="horizontal">
+
+            <ProjectCardFront handleClick={props.handleClick} handleDelete={props.handleDelete} project={project} key="front"></ProjectCardFront>
+
+            <ProjectCardFront key="back" handleClick={props.handleClick} handleDelete={props.handleDelete} project={project}></ProjectCardFront>
+
+          </ReactCardFlip>
+        </div>
+        ))}
+
     </>
   )
 }

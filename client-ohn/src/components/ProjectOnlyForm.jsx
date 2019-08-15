@@ -1,10 +1,9 @@
 import React from 'react'
-// import { createProject, getProjects, deleteProject } from '../services/project'
-import ProjectList from './ProjectList';
-import { Link } from 'react-router-dom';
 
 
-class Project extends React.Component {
+
+//projects contains the form to submit the project
+class ProjectOnlyForm extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
@@ -12,7 +11,7 @@ class Project extends React.Component {
         name: '',
         description: ''
       },
-      projects: this.props.projects
+      
     }
   }
 
@@ -44,33 +43,31 @@ class Project extends React.Component {
   
   render() {
     return (
-      <div>
+      <>
         <form className="flex-column" onSubmit={this.handleProjectSubmit} >
           <label htmlFor="name">Title </label>
-          <input
+          <textarea
             type='text'
             value={this.state.projectData.name}
             onChange={this.handleChange}
             name="name"
-          ></input>
+            rows="1" cols="50"
+          ></textarea>
           <label htmlFor="description">Description</label>
           <textarea
             type='text'
             value={this.state.projectData.description}
             onChange={this.handleChange}
             name="description"
-            className="input-description"
+            // className="input-description"
             rows="4" cols="50"
             
           ></textarea>
-          <input type="submit" value="Create a project" />
-
+          <input type="submit" value="Create a project" className="btn-outline-dark"/>
         </form>
-        <ProjectList projects={this.props.projects} handleDelete={this.props.handleDelete} />
-        <Link to='/dashboard'>Back</Link>
-      </div>
+      </>
     )
   }
 }
 
-export default Project
+export default ProjectOnlyForm
