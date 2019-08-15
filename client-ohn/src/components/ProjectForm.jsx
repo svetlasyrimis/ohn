@@ -1,5 +1,5 @@
 import React from 'react'
-import { createProject, getProjects, deleteProject } from '../services/project'
+// import { createProject, getProjects, deleteProject } from '../services/project'
 import ProjectList from './ProjectList';
 import { Link } from 'react-router-dom';
 
@@ -26,6 +26,7 @@ class Project extends React.Component {
       }
     }))
   }
+  
   handleProjectSubmit = async (ev) => {
     ev.preventDefault();
     
@@ -44,20 +45,22 @@ class Project extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleProjectSubmit} >
-          <label htmlFor="name">Project </label>
+        <form className="flex-column" onSubmit={this.handleProjectSubmit} >
+          <label htmlFor="name">Title </label>
           <input
             type='text'
             value={this.state.projectData.name}
             onChange={this.handleChange}
             name="name"
           ></input>
+          <label htmlFor="description">Description</label>
           <input
             type='text'
             value={this.state.projectData.description}
             onChange={this.handleChange}
             name="description"
             size="35"
+            className="input-description"
             
           ></input>
           <input type="submit" value="Create a project" />

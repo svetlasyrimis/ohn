@@ -8,6 +8,8 @@ const ProjectList = props => {
     <>
       {props.projects && props.projects.map(project =>
         <div key={project.id}>
+          <hr />
+          <p>Your Projects</p>
           <h1>Project id : {project.id}</h1>
           <h2>Project name : {project.name}</h2>
           <p>Description {project.description}</p>

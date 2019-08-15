@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'authentication#login'
   get '/users/verify', to: 'users#verify'
   post '/collaborator/:id', to: 'projects#add_collaborator'
+  get '/projects/search/:search', to: 'projects#search'
   
   resources :users do
     resources :skills

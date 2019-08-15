@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import Nav from './components/Nav'
+import Navigation from './components/Navigation'
 import Skills from './components/SkillForm'
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -10,6 +10,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/ProjectForm'
 import Interests from './components/Interests'
 import ProjectCard from './components/ProjectCard'
+import Button from 'react-bootstrap/Button';
+// import InputGroup from 'react-bootstrap/InputGroup'
+// import { ModalContainer, ModalRoute } from 'react-router-modal';
+import Search from './components/Search'
+// import { Modal,ModalHeader,ModalFooter,ModalBody} from 'react-bootstrap'
+import ModalComponent from './components/ModalComponent'
+// assumes webpack loader for css
+// ... or include this css however you do that in your project ...
+import 'react-router-modal/css/react-router-modal.css'
+// import { Modal, ModalDialog, ModalHeader, ModalFooter, ModalBody, ModalTitle } from 'react-bootstrap';
+
 import {
   loginUser,
   registerUser,
@@ -32,7 +43,9 @@ import {
   destroyInterest,
   createInterest
 } from './services/interest';
-import SkillList from './components/SkillList';
+// import SkillList from './components/SkillList';
+import ProfilePage from './components/ProfilePage';
+
 
 
 class App extends React.Component {
@@ -50,17 +63,19 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
+      show: false
 
     };
 
   }
-
+  
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
       this.setState({
         currentUser: user,
       })
+      console.log(this.state.currentUser)
       const skills = await getSkills(this.state.currentUser.id)
       // debugger
       const interests = await getInterests(this.state.currentUser.id)
@@ -180,7 +195,7 @@ class App extends React.Component {
 
   handleDeleteProject = async (ev) => {
     const id = ev.target.name
-    const resp = await deleteProject(id)
+    await deleteProject(id)
 
     this.setState(prevState => ({
       projects: prevState.projects.filter(project =>
@@ -190,7 +205,8 @@ class App extends React.Component {
   }
 
   //task 
-  
+
+
 
 
   render() {
@@ -211,13 +227,14 @@ class App extends React.Component {
 
         {this.state.currentUser &&
           <>
-            <Nav handleLogout={this.handleLogout} />
+            <Navigation handleLogout={this.handleLogout} />
             {/* <Dashboard currentUser={this.state.currentUser} /> */}
-            <p>Hey this is your dashboard
-          welcome {this.state.currentUser.username}</p>
-            <Link to='/skills'>Skills</Link>
-            <Link to='/projects'>Project</Link>
-            <Link to='/interests'>Interests</Link>
+            <p className="greeting">Welcome {this.state.currentUser.username}</p>
+            <Dashboard />
+            <Link to='/projects'><Button variant="outline-success">Create a Project</Button></Link>
+            <Link to='/search'><Button variant="outline-warning">Join a Project</Button></Link>
+
+
             <Route
               exact
               path="/skills"
@@ -256,10 +273,25 @@ class App extends React.Component {
 
               />
             )} />
-          <Route exact path="/projects/:project_id" render={(props) => 
-            <ProjectCard id={props.match.params.project_id}  />
+            <Route exact path="/projects/:project_id" render={(props) =>
+              <ProjectCard id={props.match.params.project_id} />
             } />
+            <Route exact path="/profile" render={(props) => (
+              <ProfilePage
+                user={this.state.currentUser}
+                interests={this.state.interests}
+                skills={this.state.skills} />)}
+            />
+            <Route exact path="/search" render={(props) => (
+              <Search
+                user={this.state.currentUser}
+                interests={this.state.interests}
+                skills={this.state.skills} />)}
+            />
+            <ModalComponent />
+
           </>
+
         }
 
       </div>
@@ -268,4 +300,21 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
+
+{/* <Modal show={true}>
+          
+          <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p>Modal body text goes here.</p>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary">Close</Button>
+            <Button variant="primary">Save changes</Button>
+          </Modal.Footer>
+        
+        </Modal> */}
 

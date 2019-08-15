@@ -15,27 +15,17 @@ export default class TaskForm extends React.Component {
     }
   }
 
-  // async componentDidMount() {
-  //   const tasks = await getTasks(this.props.projectId)
-  //   this.setState({
-  //     tasks: tasks
-  //   })
-
-  //   console.log(this.state.tasks)
-  // }
+  
   handleCreateTask = async (projectId,data) => {
     const task = await createTask(projectId,data);
 
     console.log(task);
-    // this.setState(prevState => ({
-    //   tasks: [task, ...prevState.tasks],
-
-    // }))
   }
+
   handleTaskSubmit = async (ev) => {
     ev.preventDefault();
     const resp = await this.handleCreateTask(this.props.projectId, this.state.name)
-    debugger;
+    // debugger;
     console.log(resp)
     this.setState({
       name: ''

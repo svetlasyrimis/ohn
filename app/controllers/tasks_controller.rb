@@ -27,6 +27,9 @@ class TasksController < ApplicationController
 
   
   def update
+    @project = Project.find(params[:project_id])
+    @task = Task.find(params[:id])
+   
     if @task.update(task_params)
       render json: @task
     else
@@ -49,6 +52,6 @@ class TasksController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def task_params
-    params.require(:task).permit(:name,:user_id,:project_id,:isCompleted)
+    params.require(:task).permit(:id,:name,:user_id,:project_id,:isCompleted)
   end
 end

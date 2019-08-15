@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { showProject } from '../services/project'
-import TaskForm from './TaskForm';
-import { getTasks,createTask,destroyTask } from '../services/task'
+import { createTask, destroyTask, updateTask } from '../services/task'
 import TaskList from './TaskList'
+
+
 export default class ProjectCard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,18 +14,19 @@ export default class ProjectCard extends React.Component {
       collaborators: [],
       tasks: [],
       taskName: {
-        name:''
-      }
+        name: ''
+      },
+      idEdit: null
     }
   }
 
   async componentDidMount() {
-    const tasks = await getTasks(this.props.id)
+    // const tasks = await getTasks(this.props.id)
     this.setState({
       id: this.props.id,
-      tasks: tasks
+      // tasks: tasks
     })
-    console.log(this.state.tasks)
+
     const res = await showProject(this.props.id)
     // debugger
     console.log(res);
@@ -34,14 +35,15 @@ export default class ProjectCard extends React.Component {
       name: res.name,
       description: res.description,
       collaborators: res.collaborators.map(collaborator => collaborator.user.username).join(',').split(' '),
-      creator: res.collaborators.filter(collaborator => collaborator.isOwner)[0].user.username
+      creator: res.collaborators.filter(collaborator => collaborator.isOwner)[0].user.username,
+      tasks: res.tasks
     })
 
-    console.log(this.state.collaborators)
+    
   }
 
-  handleCreateTask = async (projectId,data) => {
-    const task = await createTask(projectId,data);
+  handleCreateTask = async (projectId, data) => {
+    const task = await createTask(projectId, data);
 
     console.log(task);
     this.setState(prevState => ({
@@ -53,7 +55,7 @@ export default class ProjectCard extends React.Component {
     ev.preventDefault();
     const resp = await this.handleCreateTask(this.props.id, this.state.taskName)
     // debugger;
-    
+    console.log(resp.data)
     this.setState({
       taskName: {
         name: ''
@@ -69,7 +71,47 @@ export default class ProjectCard extends React.Component {
       }
     }));
   }
+  edit = (taskId) => {
+    // const taskId = ev.target.name
+    this.setState(prevState => {
+      const { name } = prevState.tasks.find(task => task.id === taskId);
+      return {
+        taskName:
+          { name },
+      };
+    });
+  }
 
+  handleUpdate = (ev) => {
+    const taskId = ev.target.name
+    console.log(taskId)
+    console.log(this.state.tasks)
+    const currentTask = this.state.tasks.find(task => task.id === parseInt(taskId))
+    console.log(currentTask.name)
+
+    this.setState({
+      isEdit: true,
+      taskName: {
+        name: currentTask.name,
+      },
+      editingId: currentTask.id
+    });
+  }
+  // update = async () => {
+
+
+
+  handleUpdateSubmit = async (ev) => {
+    ev.preventDefault();
+    const data = this.state.taskName
+    const resp = await updateTask(this.props.id, this.state.editingId, data)
+
+    this.setState(prevState => ({
+      tasks: prevState.tasks.map(task => task.id === resp.id ? resp : task)
+    }))
+
+
+  }
   handleDeleteTask = async (ev) => {
     const taskId = ev.target.name
     console.log(ev.target.name)
@@ -93,18 +135,29 @@ export default class ProjectCard extends React.Component {
         <p>Collaborators : {this.state.collaborators}</p>
         {/* <TaskForm projectId={this.state.id} tasks={this.state.tasks}/> */}
         <div>
-        <p>Hey</p>
-        <form onSubmit={this.handleTaskSubmit}>
-        <input
-            type='text'
-            value={this.state.taskName.name}
-            onChange={this.handleChange}
-            name="name"
-          ></input>
-          <input type="submit" value="Add a task"></input>
-        </form>
+          <p>Hey</p>
+          {this.state.isEdit &&
+            <form onSubmit={this.handleUpdateSubmit}>
+              <input
+                type='text'
+                value={this.state.taskName.name}
+                onChange={this.handleChange}
+                name="name"
+              ></input>
+              <input type="submit" value="Update"></input>
+            </form>}
+          {!this.state.isEdit &&
+            <form onSubmit={this.handleTaskSubmit}>
+              <input
+                type='text'
+                value={this.state.taskName.name}
+                onChange={this.handleChange}
+                name="name"
+              ></input>
+              <input type="submit" value="Add a task"></input>
+            </form>}
         </div>
-        <TaskList projectId={this.props.id} tasks={this.state.tasks} handleDelete={this.handleDeleteTask}/>
+        <TaskList projectId={this.props.id} tasks={this.state.tasks} handleDelete={this.handleDeleteTask} handleUpdate={this.handleUpdate} edit={this.edit} />
       </div>
 
     )

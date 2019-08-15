@@ -1,26 +1,41 @@
 import React from 'react'
 
+
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import NewModal from './NewModal'
 
+class Dashboard extends React.Component  {
+  constructor() {
+    super()
+    this.state = { show: false };
+  }
+  showModal = () => {
+    this.setState({ show: true });
+  };
 
-
-const Dashboard = props => {
-          
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+  render() {
     return (
-      <div>
-        
-        <p>Hey this is your dashboard
-          welcome {props.currentUser.username}
+      
+      <div className="skill-interests-div">
+          <NewModal show={this.state.show} handleClose={this.hideModal}>
+          <p>Modal</p>
+          <p>Data</p>
+        </NewModal>
+          <button type="button" onClick={this.showModal}>
+          open
+        </button>
+            <Link to='/skills'><Button variant="outline-danger">Skills</Button></Link>
+          <Link to='/interests'><Button variant="outline-info">Interests</Button></Link>
          
-          <br />
-          <Link to='/skills'>Skills</Link>
-          <Link to='/interests'>Interests</Link>
-          <Link to='/projects'>Project</Link>
-        </p>
-       
+
+            
       </div>
     )
-  
+    }
 }
 
 export default Dashboard

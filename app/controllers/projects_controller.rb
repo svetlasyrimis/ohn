@@ -8,6 +8,16 @@ class ProjectsController < ApplicationController
     render json: @projects, include: [:tasks, {collaborators: {include: [:user]}}]
   end
 
+  def search
+    @projects = Project.where("name LIKE ?", "%#{params[:search]}%")
+    p @projects
+    @filteredProjects = @projects.select do |project|
+      nil == project.collaborators.find do |colab|
+        colab.isOwner == true && colab.user_id == @current_user.id
+      end
+    end
+    render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
+  end
   # render json: @users, include: [:skills,:interests, {projects: {include: [:tasks, :users]}}], status: :ok
   def show
     render json: @project,include: [:tasks, {collaborators: {include: [:user]}}]
@@ -53,7 +63,7 @@ class ProjectsController < ApplicationController
 
   
   def project_params
-    params.require(:project).permit(:name,:description)
+    params.require(:project).permit(:name,:description, :search)
   
   end
 

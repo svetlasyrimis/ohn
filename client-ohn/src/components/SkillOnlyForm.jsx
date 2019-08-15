@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import SkillList from './SkillList'
+
 // import { getSkills } from '../services/skill'
 
 
@@ -11,10 +11,7 @@ export default class Skills extends React.Component {
       super(props);
       this.state = {
         name: '',
-        skills: this.props.skills,
-        
       };
-      console.log(this.state.skills)
     }
   
   
@@ -36,18 +33,9 @@ export default class Skills extends React.Component {
       name: '',
     });
     
-    // this.props.history.push(`/users/${id}`);
+   
   }
-  // async componentDidMount() {
-  //   const { id } = this.props.currentUser;
-  //   const skills = await getSkills(id)
-  //   this.state = {
-  //     name: '',
-  //     skills: skills,
-      
-  //   };
-  //   console.log(this.state.skills)
-  // }
+  
   
 
   render() {
@@ -65,10 +53,7 @@ export default class Skills extends React.Component {
               name="name"
                ></input>
                  <input type="submit" value="Add a skill" />
-            
         </form>
-        <SkillList skills={this.props.skills} handleDelete={this.props.handleDelete} />
-        <Link to='/dashboard'>Back</Link>
         </>
        
     )
