@@ -2,13 +2,20 @@ import React from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import Nav from './components/Nav'
+import Navigation from './components/Navigation'
 import Skills from './components/SkillForm'
-import { Route,Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/ProjectForm'
 import Interests from './components/Interests'
+import ProjectCard from './components/ProjectCard'
+import Button from 'react-bootstrap/Button';
+
+import Search from './components/Search'
+
+import 'react-router-modal/css/react-router-modal.css'
+
 
 import {
   loginUser,
@@ -32,7 +39,9 @@ import {
   destroyInterest,
   createInterest
 } from './services/interest';
-import SkillList from './components/SkillList';
+// import SkillList from './components/SkillList';
+import ProfilePage from './components/ProfilePage';
+
 
 
 class App extends React.Component {
@@ -50,7 +59,8 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
-      
+      show: false
+
     };
 
   }
@@ -61,26 +71,27 @@ class App extends React.Component {
       this.setState({
         currentUser: user,
       })
+      console.log(this.state.currentUser)
       const skills = await getSkills(this.state.currentUser.id)
       // debugger
       const interests = await getInterests(this.state.currentUser.id)
       const projects = await getProjects()
-      
+
       this.setState({
-        skills: skills,
-        projects: projects,
-        interests: interests
+        skills: this.state.currentUser.skills,
+        projects: this.state.currentUser.projects,
+        interests: this.state.currentUser.interests
       })
       // debugger
     } else {
       this.props.history.push("/")
     }
-    
-    console.log(this.state.skills)
+
+    // console.log(this.state.skills)
   }
 
 
-  
+
 
   // Auth
 
@@ -134,8 +145,8 @@ class App extends React.Component {
       skills: [skill, ...prevState.skills]
     }))
   }
-  handleDeleteSkill = async (ev) => { 
-    
+  handleDeleteSkill = async (ev) => {
+
     const skillId = ev.target.name
     console.log(ev.target.name)
     await destroySkill(this.state.currentUser.id, skillId);
@@ -144,7 +155,7 @@ class App extends React.Component {
         skill.id !== parseInt(skillId)
       )
     }))
-    
+
   }
   //interest
   handleCreateInterest = async (userId, data) => {
@@ -154,7 +165,7 @@ class App extends React.Component {
       interests: [interest, ...prevState.interests]
     }))
   }
-  handleDeleteInterest = async (ev) => { 
+  handleDeleteInterest = async (ev) => {
     const interestId = ev.target.name
     console.log(ev.target.name)
     await destroyInterest(this.state.currentUser.id, interestId);
@@ -163,34 +174,39 @@ class App extends React.Component {
         interest.id !== parseInt(interestId)
       )
     }))
-    
+
   }
 
   // project 
   handleCreateProject = async (data) => {
     const project = await createProject(data);
-    
+
     console.log(project);
     this.setState(prevState => ({
       projects: [project, ...prevState.projects],
-     
+
     }))
-    
+
   }
 
   handleDeleteProject = async (ev) => {
     const id = ev.target.name
-    const resp = await deleteProject(id)
-    
+    await deleteProject(id)
+
     this.setState(prevState => ({
       projects: prevState.projects.filter(project =>
         project.id !== parseInt(id)
       )
     }))
   }
- 
+
+  //task 
+
+
+
+
   render() {
-    
+
     return (
       <div className="App">
         {/* <Route exact path="/" render={() => (<Nav />)} /> */}
@@ -203,61 +219,88 @@ class App extends React.Component {
           <Register
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
-              formData={this.state.authFormData} />)} />
-          
+            formData={this.state.authFormData} />)} />
+
         {this.state.currentUser &&
           <>
-          <Nav handleLogout={this.handleLogout} />
-          {/* <Dashboard currentUser={this.state.currentUser} /> */}
-          <p>Hey this is your dashboard
-          welcome {this.state.currentUser.username}</p>
-          <Link to='/skills'>Skills</Link>
-          <Link to='/projects'>Project</Link>
-          <Link to='/interests'>Interests</Link>
-          <Route
-          exact
-          path="/skills" 
-          render={(props) => (
-            <Skills
-              {...props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateSkill}
-              skills={this.state.skills}
-              handleDelete={this.handleDeleteSkill}
-              
+            <Navigation handleLogout={this.handleLogout} />
+            {/* <Dashboard currentUser={this.state.currentUser} /> */}
+            <p className="greeting">Welcome {this.state.currentUser.username}</p>
+            <Dashboard />
+            <Link to='/projects'><Button variant="outline-success">Create a Project</Button></Link>
+            <Link to='/search'><Button variant="outline-warning">Join a Project</Button></Link>
+
+
+            <Route
+              exact
+              path="/skills"
+              render={(props) => (
+                <Skills
+                  {...props}
+                  currentUser={this.state.currentUser}
+                  handleSubmit={this.handleCreateSkill}
+                  skills={this.state.skills}
+                  handleDelete={this.handleDeleteSkill}
+
+                />
+
+              )} />
+
+            <Route exact path="/projects" render={(props) => (
+              <Projects
+                {...props}
+                currentUser={this.state.currentUser}
+                handleSubmit={this.handleCreateProject}
+                projects={this.state.projects}
+                handleDelete={this.handleDeleteProject}
+
+
+              />
+            )} />
+
+            <Route exact path="/interests" render={(props) => (
+              <Interests
+                {...props}
+                currentUser={this.state.currentUser}
+                handleSubmit={this.handleCreateInterest}
+                interests={this.state.interests}
+                handleDelete={this.handleDeleteInterest}
+
+
+              />
+            )} />
+            <Route exact path="/projects/:project_id" render={(props) =>
+              <ProjectCard id={props.match.params.project_id} />
+            } />
+            <Route exact path="/profile" render={(props) => (
+              <ProfilePage
+                {...props}
+                user={this.state.currentUser}
+                interests={this.state.interests}
+                skills={this.state.skills}
+                handleSubmit={this.handleCreateSkill}
+
+              />)}
+
+            />
+            <Route exact path="/search" render={(props) => (
+              <Search
+                user={this.state.currentUser}
+                interests={this.state.interests}
+                skills={this.state.skills} />)}
             />
             
-            )}  />
-        
-          <Route exact path="/projects" render={(props) => (
-            <Projects
-              {...props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateProject}
-              projects={this.state.projects}
-              handleDelete={this.handleDeleteProject}
-             
-              
-            />
-          )} />
-          <Route exact path="/interests" render={(props) => (
-            <Interests
-              {... props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateInterest}
-              interests={this.state.interests}
-              handleDelete={this.handleDeleteInterest}
-             
-              
-            />
-            )}/>
+
           </>
+
         }
-        
+
       </div>
     );
   }
 }
 
 export default withRouter(App);
+
+
 

@@ -3,14 +3,138 @@
 }
 
 a {
-  margin: 40px;
-  
-  padding: 20px;
+  padding: 10px;
 }
 
-button {
+/* button {
   margin: 20px;
 }
 input {
   margin: 20px;
+}  */
+.nav-bar {
+  margin: 5px;
+  padding:10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
+.logo {
+  width: 100px;
+  height: 100px;
+}
+.body {
+  margin: 0;
+}
+
+.logo {
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-description {
+  width: 250px;
+  height: 150px;
+}
+br {
+  border-bottom:1px dashed black;
+  display:block;
+}
+.skills-and-interests{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.user-stuff {
+  
+}
+.bold {
+  font-weight: bold;
+  font-size: 26px;
+}
+.greeting {
+  font-size: 24px;
+  transition: all .5s ease-in-out;
+  /* animation: text  5s ease-in-out; */
+  animation: text 2s ease-in-out;
+  
+}
+.icon {
+  margin: 3px;
+  cursor: pointer;
+}
+.garbage{
+  background-color:red;
+  border-radius: 20%;
+}
+@keyframes text {
+  0% {
+    color: black;
+    margin-bottom: 10px;
+    letter-spacing: 25px;
+    opacity: 0.5;
+    /* transform:  rotate(180deg) scale(1.2); */
+    transform: rotateY(180deg) scale(1.2);
+  }
+  24% {
+    letter-spacing: 15px;
+    margin-bottom: 10px;
+
+  }
+  75% {
+    opacity: 0.5;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+    /* transform:  rotate(90deg) scale(1.2); */
+  }
+  100% {
+    
+    margin-bottom: 20px;
+    letter-spacing: 6px; 
+    /* text-transform: uppercase; */
+    /* transform:
+    translate3d(18rem,8rem,0); */
+    opacity: 0;
+    
+    
+    /* letter-spacing: -40px; */
+  }
+}
+
+@keyframes smoky-mirror {
+  60% {
+    text-shadow: 0 0 40px whitesmoke; }
+  to {
+    transform:
+      translate3d(18rem,8rem,0)
+      rotate(40deg) 
+      skewX(70deg)
+      scale(2);
+     text-shadow: 0 0 20px whitesmoke;
+    opacity: 0;
+  }
+}
+
+input {
+  padding: 5px;
+  margin:5px;
+}
+
+
+
+/* nav.sidebar {
+  -webkit-transition: margin 200ms ease-out;
+  -moz-transition: margin 200ms ease-out;
+  -o-transition: margin 200ms ease-out;
+  transition: margin 200ms ease-out;
+} */

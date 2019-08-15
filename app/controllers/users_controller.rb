@@ -5,13 +5,12 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
-    render json: @users
+    render json: @users, include: [:skills,:interests,:projects]
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, include: [:skills,:interests,:projects]
   end
 
   # POST /users
@@ -43,7 +42,9 @@ class UsersController < ApplicationController
     @user = {
       id: @current_user[:id],
       username: @current_user[:username],
-      email: @current_user[:email]
+      email: @current_user[:email],
+      skills: @current_user.skills,
+      interests: @current_user.interests
     }
 
     render json: @user

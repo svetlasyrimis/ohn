@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import SkillList from './SkillList'
-import { getSkills } from '../services/skill'
+// import { getSkills } from '../services/skill'
 
 
 export default class Skills extends React.Component {
