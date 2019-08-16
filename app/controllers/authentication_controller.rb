@@ -4,7 +4,10 @@ class AuthenticationController < ApplicationController
     @user = User.find_by_username(params[:username])
     if @user.authenticate(params[:password]) # authenticate method provided by Bcrypt and 'has_secure_password'
       token = encode(id: @user.id, username: @user.username)
-      render json: { token: token , user: {id: @user.id, username: @user.username, email: @user.email, skills: @user.skills, interests: @user.interests, projects: getUserProjects(@user)}}, status: :ok
+      render json: { token: token , user: {id: @user.id, username: @user.username, email: @user.email, skills: @user.skills, interests: @user.interests,
+      projects: getUserProjects(@user, true),
+      colabFor: getUserProjects(@user, false)
+      }}, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
     end
@@ -16,3 +19,5 @@ class AuthenticationController < ApplicationController
     params.permit(:username, :password)
   end
 end
+
+# projects: getUserProjects(@user)

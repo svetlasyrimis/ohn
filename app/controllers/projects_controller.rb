@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     end
     render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
   end
-  # render json: @users, include: [:skills,:interests, {projects: {include: [:tasks, :users]}}], status: :ok
+ 
   def show
     render json: @project,include: [:tasks, {collaborators: {include: [:user]}}]
   end
@@ -29,14 +29,14 @@ class ProjectsController < ApplicationController
     if @project.save
       @collaborator = Collaborator.new(user: @current_user, project: @project)
       @collaborator.save
-      render json: @project, include: {collaborators: {include: [:user]} }, status: :created
+      render json: @project, include: [:tasks, {collaborators: {include: [:user]}}], status: :created
     end 
   end
   
   def add_collaborator 
     @collaborator = Collaborator.new(user: @current_user, project: @project, isOwner:false)
     @collaborator.save
-    render json: @project, include: :collaborators, status: :created
+    render json: @project, include: [:tasks, {collaborators: {include: [:user]}}], status: :created
   end
 
   

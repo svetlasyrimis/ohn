@@ -18,10 +18,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem "byebug"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'bundler', '~> 2.0.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

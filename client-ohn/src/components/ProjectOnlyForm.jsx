@@ -1,7 +1,6 @@
 import React from 'react'
 
 
-
 //projects contains the form to submit the project
 class ProjectOnlyForm extends React.Component {
   constructor(props) {

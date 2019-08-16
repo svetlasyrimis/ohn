@@ -1,16 +1,16 @@
 import React from 'react'
 import ProjectList from './ProjectList'
 import { searchForProjects } from '../services/search';
-
+import ProjectListSearch from './ProjectListSearch'
 
 export default class Search extends React.Component {
   constructor(props) {
-    super(props) 
+    super(props)
     this.state = {
-      
+
       keyword: "",
-      
-      projects:[]
+
+      projects: []
     }
   }
 
@@ -22,9 +22,9 @@ export default class Search extends React.Component {
   }
 
   handleSearchSubmit = async (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     const results = await searchForProjects(this.state.keyword)
-    debugger;
+    // debugger;
     console.log(results)
     this.setState({
       projects: results,
@@ -33,15 +33,17 @@ export default class Search extends React.Component {
       },
     })
   }
+
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleSearchSubmit}>
           <input type="text" name="keyword" value={this.state.keyword} onChange={this.handleChange} />
-        <input type="submit" value="Search for a project" />
+          <input type="submit" value="Search for a project" />
         </form>
-        <ProjectList projects={this.state.projects}/>
-          
+        <ProjectListSearch becomeCollaborator={this.props.addUserAsCollaborator} projects={this.state.projects} />
+
       </div>
     )
   }

@@ -7,7 +7,7 @@ import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
-import ProjectCard from './components/ProjectCard'
+import ProjectDetails from './components/ProjectDetails'
 import Button from 'react-bootstrap/Button';
 import Search from './components/Search'
 
@@ -38,6 +38,7 @@ import {
 } from './services/interest';
 // import SkillList from './components/SkillList';
 import ProfilePage from './components/ProfilePage';
+import { becomeCollaborator } from './services/search';
 
 
 
@@ -70,8 +71,11 @@ class App extends React.Component {
         currentUser: user,
         projects: user.projects.reverse(),
         skills: user.skills,
-        interests: user.interests
+        interests: user.interests,
+        // collabFor: this.removeDuplicates(user.colabFor),
+        
       })
+      console.log(this.state.projects)
       // const skills = await getSkills(this.state.currentUser.id)
       // const interests = await getInterests(this.state.currentUser.id)
 
@@ -82,7 +86,12 @@ class App extends React.Component {
     // console.log(this.state.skills)
   }
 
-
+  // removeDuplicates = (array, prop) => {
+  //   return array.filter((obj, position, arr) => {
+  //     return arr.map(mapObj => mapObj[prop].indexOf(obj[prop]) === position)
+  //   });
+  // }
+  
 
 
   // Auth
@@ -98,10 +107,10 @@ class App extends React.Component {
       skills: userData.skills,
       interests: userData.interests,
       projects: userData.projects,
-      
+      // collabFor: this.removeDuplicates(userData.colabFor),
       isLoggedIn: true
     })
-    
+    console.log(this.state.userData)
     this.props.history.push("/dashboard")
   }
   handleChange = ev => {
@@ -198,6 +207,23 @@ class App extends React.Component {
     }))
   }
 
+  addUserAsCollaborator = async (ev) => {
+    ev.preventDefault();
+    const projectId = ev.target.name
+    const resp = await becomeCollaborator(projectId)
+    this.setState(prevState => ({
+      currentUser: {
+        ...prevState.currentUser,
+        colabFor: [
+          ...prevState.currentUser.colabFor,
+          resp
+        ]
+      }
+    }))
+
+
+  }
+
   //task 
 
 
@@ -223,12 +249,12 @@ class App extends React.Component {
           <>
             <Navigation handleLogout={this.handleLogout} />
             {/* <Dashboard currentUser={this.state.currentUser} /> */}
-            
-          <Route exact path="/dashboard" render={(props) => (
-            <Dashboard
-              currentUser={this.state.currentUser}
-            />)} /> 
-           
+
+            <Route exact path="/dashboard" render={(props) => (
+              <Dashboard
+                currentUser={this.state.currentUser}
+              />)} />
+
 
 
 
@@ -245,9 +271,9 @@ class App extends React.Component {
               />
             )} />
 
-            
+
             <Route exact path="/projects/:project_id" render={(props) =>
-              <ProjectCard id={props.match.params.project_id} />
+              <ProjectDetails id={props.match.params.project_id} />
             } />
             <Route exact path="/profile" render={(props) => (
               <ProfilePage
@@ -266,7 +292,10 @@ class App extends React.Component {
               <Search
                 user={this.state.currentUser}
                 interests={this.state.interests}
-                skills={this.state.skills} />)}
+                skills={this.state.skills}
+                addUserAsCollaborator={this.addUserAsCollaborator}
+              />)}
+
             />
 
 

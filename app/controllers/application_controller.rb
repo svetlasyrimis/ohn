@@ -1,3 +1,4 @@
+
 class ApplicationController < ActionController::API
   SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
 
@@ -11,13 +12,15 @@ class ApplicationController < ActionController::API
     HashWithIndifferentAccess.new decoded
   end
 
-  def getUserProjects(user)
+  def getUserProjects(user, boolean)
     projects = user.collaborators.map do |collab|
-      if collab.isOwner == true 
+      if collab.isOwner == boolean 
         collab.project
       end
     end
 
+    projects = projects.select{|a| a != nil}
+    
     projects.map do |project|
       { **project.as_json.symbolize_keys, tasks: project.tasks, collaborators: project.collaborators.map do |collab|
         { **collab.as_json.symbolize_keys, user: collab.user} 
