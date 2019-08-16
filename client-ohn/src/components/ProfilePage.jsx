@@ -14,7 +14,7 @@ export default function ProfilePage(props) {
   return (
     <div>
       <div className="user-info">
-        <p>Your Profile Page</p>
+        
         <p className="bold">Username : {props.user.username}</p>
         <p className="bold">Email : {props.user.email}</p>
         <hr />

@@ -68,7 +68,7 @@ class App extends React.Component {
       // const projects = await getProjects()
       this.setState({
         currentUser: user,
-        projects: user.projects,
+        projects: user.projects.reverse(),
         skills: user.skills,
         interests: user.interests
       })
@@ -223,10 +223,12 @@ class App extends React.Component {
           <>
             <Navigation handleLogout={this.handleLogout} />
             {/* <Dashboard currentUser={this.state.currentUser} /> */}
-            <p className="greeting">Welcome {this.state.currentUser.username}</p>
-            <Dashboard />
-            <Link to='/projects'><Button variant="outline-success">Create a Project</Button></Link>
-            <Link to='/search'><Button variant="outline-warning">Join a Project</Button></Link>
+            
+          <Route exact path="/dashboard" render={(props) => (
+            <Dashboard
+              currentUser={this.state.currentUser}
+            />)} /> 
+           
 
 
 
@@ -243,17 +245,7 @@ class App extends React.Component {
               />
             )} />
 
-            {/* <Route exact path="/interests" render={(props) => (
-              <Interests
-                {...props}
-                currentUser={this.state.currentUser}
-                handleSubmit={this.handleCreateInterest}
-                interests={this.state.interests}
-                handleDelete={this.handleDeleteInterest}
-
-
-              />
-            )} /> */}
+            
             <Route exact path="/projects/:project_id" render={(props) =>
               <ProjectCard id={props.match.params.project_id} />
             } />

@@ -2,6 +2,7 @@ import React from 'react';
 import { showProject } from '../services/project'
 import { createTask, destroyTask, updateTask } from '../services/task'
 import TaskList from './TaskList'
+import { Link } from 'react-router-dom'
 
 
 export default class ProjectCard extends React.Component {
@@ -127,15 +128,16 @@ export default class ProjectCard extends React.Component {
   render() {
     return (
 
-      <div>
-        <h1>Project {this.state.id}</h1>
+      <div className="project-details-container">
+        <div className="project-details-items flex-column">
+        {/* <h1>Project {this.state.id}</h1> */}
         <p>Name: {this.state.name}</p>
         <p>Description {this.state.description}</p>
         <p>Creator: {this.state.creator}</p>
         <p>Collaborators : {this.state.collaborators}</p>
         {/* <TaskForm projectId={this.state.id} tasks={this.state.tasks}/> */}
-        <div>
-          <p>Hey</p>
+        
+         
           {this.state.isEdit &&
             <form onSubmit={this.handleUpdateSubmit}>
               <input
@@ -156,8 +158,10 @@ export default class ProjectCard extends React.Component {
               ></input>
               <input type="submit" value="Add a task"></input>
             </form>}
-        </div>
+        
         <TaskList projectId={this.props.id} tasks={this.state.tasks} handleDelete={this.handleDeleteTask} handleUpdate={this.handleUpdate} edit={this.edit} />
+          <Link to="/projects">Back to projects</Link>
+          </div>
       </div>
 
     )

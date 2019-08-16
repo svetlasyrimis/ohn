@@ -1,25 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
-// import { Link } from 'react-router-dom'
-// import Button from 'react-bootstrap/Button';
+const Dashboard = props => {
+  return (
+    <div>
+      <p className="greeting">Welcome {props.currentUser.username}</p>
+      <Link to='/projects'><Button variant="outline-success">Create a Project</Button></Link>
+      <Link to='/search'><Button variant="outline-warning">Join a Project</Button></Link>
 
+    </div>
+  )
 
-class Dashboard extends React.Component  {
-  
-  render() {
-    return (
-      
-      <div className="skill-interests-div">
-         
-            {/* <Link to='/skills'><Button variant="outline-danger">Skills</Button></Link>
-          <Link to='/interests'><Button variant="outline-info">Interests</Button></Link> */}
-         
-
-            
-      </div>
-    )
-    }
 }
 
 export default Dashboard
