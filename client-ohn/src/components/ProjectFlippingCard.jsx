@@ -15,7 +15,6 @@ class ProjectFlippingCard extends React.Component {
       project: this.props.project,
       collabFor: this.props.collabFor,
       collaborators: this.props.collaborators,
-      
     }
   }
 
@@ -41,7 +40,7 @@ class ProjectFlippingCard extends React.Component {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
 
-        <ProjectCardFront handleClick={this.handleClick} handleDelete={this.props.handleDelete} project={this.state.project} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator} handleAdd={this.handleAdd} isAdded={this.state.isAdded} deleteThisProject={this.props.deleteThisProject}key="front"></ProjectCardFront>
+        <ProjectCardFront handleClick={this.handleClick} showAlertBeforeDelete={this.props.showAlertBeforeDelete} project={this.state.project} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator} handleAdd={this.handleAdd} isAdded={this.state.isAdded} updateProjectToBeDeleted={this.props.updateProjectToBeDeleted}key="front"></ProjectCardFront>
          
         <ProjectCardBack key="back" date={this.props.date} handleClick={this.handleClick} project={this.state.project} handleAdd={this.handleAdd} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator}></ProjectCardBack>
 

@@ -16,16 +16,18 @@ const ProjectList = props => {
         
         (<div key={project.id} className="project-list">
           
-          <ProjectFlippingCard date={project.created_at} project={project} handleDelete={props.handleDelete} deleteThisProject={props.deleteThisProject}currentUser={props.currentUser}></ProjectFlippingCard>
+          <ProjectFlippingCard date={project.created_at} project={project} showAlertBeforeDelete={props.showAlertBeforeDelete} updateProjectToBeDeleted={props.updateProjectToBeDeleted}currentUser={props.currentUser}></ProjectFlippingCard>
         </div>
         ))}
       <hr />
       <p>Projects you've joined</p>
-      {props.collabFor && props.collabFor.map(project => (<div key={project.id} className="project-list">
+      <div className="project-list">
+      {props.collabFor && props.collabFor.map(project => (<div key={project.id} >
         
         <ProjectFlippingCard date={project.created_at} currentUser={props.currentUser} project={project} collaborators={project.collaborators}></ProjectFlippingCard>
       </div>
       ))}
+    </div>
     </>
   )
 }

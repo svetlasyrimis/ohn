@@ -1,9 +1,14 @@
 .App {
   text-align: center;
 }
-
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
+}
 a {
   padding: 10px;
+  text-decoration: none;
 }
 
 /* button {
@@ -12,8 +17,20 @@ a {
 input {
   margin: 20px;
 }  */
+#dropdown-button {
+  background-color: #848EA2;
+  border:none;
+}
+#dropdown-button:hover {
+  background-color: black;
+}
 
-
+/* .dropdown-toggle {
+  background-color: black;
+} */
+/* .dropdown-toggle,.btn-primary, .btn-lg{
+  background-color: #848EA2;
+} */
 .nav-bar {
   margin: 5px;
   padding:10px;
@@ -59,7 +76,8 @@ body {
   align-items: center;
   background: rgba(240, 238, 238, 0.938);
   margin-top: 20px;
-  
+  padding-top:20px;
+  padding-bottom:20px;
   width: 300px;
 }
 .auth-container {
@@ -222,7 +240,8 @@ input {
 }
 .project-list{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 

@@ -11,7 +11,7 @@ const ProjectCardBack = (props) => {
     <div className="project-card">
       <p>Date added: {(new Date(props.date).toDateString())} </p>
       <p>Project: {props.project.name}</p>
-      <p>Creator: {creator}</p>
+      {/* <p>Creator: {creator}</p> */}
       <p>Collaborators : {collaborators} </p>
 
       

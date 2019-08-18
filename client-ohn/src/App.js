@@ -57,47 +57,28 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
-      show: false,
-      alert: ''
-      
-  
     };
 
   }
 
-  // handleClick = () => {
-  //   this.setState(state => ({
-  //     isToggleOn: !state.isToggleOn
-  //   }));
-  // }
-  
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
-      // const projects = await getProjects()
+
       this.setState({
         currentUser: user,
         projects: user.projects.reverse(),
         skills: user.skills,
         interests: user.interests,
-       
         collabFor: user.collabFor,
-        
       })
       // console.log(this.state.collabFor)
       // const skills = await getSkills(this.state.currentUser.id)
       // const interests = await getInterests(this.state.currentUser.id)
-
     } else {
       this.props.history.push("/")
     }
   }
-
-  // Auth
-
-  // handleLoginButton = () => {
-  //   this.props.history.push("/login")
-  // }
 
   handleLogin = async () => {
     const userData = await loginUser(this.state.authFormData);
@@ -109,9 +90,9 @@ class App extends React.Component {
       collabFor: userData.collabFor,
       isLoggedIn: true
     })
-    // console.log(this.state.collabFor)
     this.props.history.push("/dashboard")
   }
+
   handleChange = ev => {
     const { name, value } = ev.target;
     this.setState({
@@ -135,8 +116,6 @@ class App extends React.Component {
         email: "",
         password: ""
       }
-
-      
     })
     this.props.history.push("/")
   }
@@ -150,7 +129,8 @@ class App extends React.Component {
       }
     }));
   }
-  // skill 
+
+  // skills
   handleCreateSkill = async (userId, data) => {
     const skill = await createSkill(userId, data);
     console.log(skill);
@@ -193,47 +173,14 @@ class App extends React.Component {
   // project 
   handleCreateProject = async (data) => {
     const project = await createProject(data);
-
     console.log(project);
     this.setState(prevState => ({
       projects: [project, ...prevState.projects],
-
     }))
-
   }
-
-  deleteThisProject = () => {
-    const getAlert = () => (
-      <SweetAlert 
-      error
-      showCloseButton={true}
-      showConfirm={false}
-      closeOnClickOutside={true}
-      title="Are you sure?"
-      onCancel={(e) => { this.hideAlert(e) }}
-      onConfirm={(e) => { this.hideAlert(e) }}
-      >
-        
-      </SweetAlert>
-    );
-
-    this.setState({
-      alert: getAlert()
-    });
-  }
-
-  hideAlert = () => {
-    this.setState({
-      alert: '',
-    });
-  }
-
-  handleDeleteProject = async (ev) => {
-    
+  deleteThisProject = async (id) => {
     console.log("Deleted")
-    const id = ev.target.name
     await deleteProject(id)
-
     this.setState(prevState => ({
       projects: prevState.projects.filter(project =>
         project.id !== parseInt(id)
@@ -241,12 +188,29 @@ class App extends React.Component {
     }))
   }
 
+
+  // handleDeleteProject = async (ev) => {
+  //   console.log("handleDeleteProject");
+  //   this.hideAlert(true);
+  // }
+
+  // handleReallyDeleteProject = async (ev) => {
+  //   console.log("Deleted")
+  //   const id = ev.target.name
+  //   await deleteProject(id)
+
+  //   this.setState(prevState => ({
+  //     projects: prevState.projects.filter(project =>
+  //       project.id !== parseInt(id)
+  //     )
+  //   }))
+  //   this.hideAlert(false);
+  // }
+
   addUserAsCollaborator = async (ev) => {
     ev.preventDefault();
     const projectId = ev.target.name
     const resp = await becomeCollaborator(projectId)
-  
-    
     this.setState(prevState => ({
       currentUser: {
         ...prevState.currentUser,
@@ -254,24 +218,17 @@ class App extends React.Component {
           ...prevState.currentUser.collabFor,
           resp
         ],
-       
+
       },
       collabFor: [...prevState.currentUser.collabFor.reverse(),
-      resp]
+        resp]
     }))
   }
-
-  
-  //task 
-
-
-
 
   render() {
 
     return (
       <div className="App">
-        {/* <Route exact path="/" render={() => (<Nav />)} /> */}
         <Route exact path="/" render={() => (
           <Login
             handleLogin={this.handleLogin}
@@ -285,34 +242,30 @@ class App extends React.Component {
 
         {this.state.currentUser &&
           <>
-            <Navigation handleLogout={this.handleLogout} currentUser={this.state.currentUser}/>
-            {/* <Dashboard currentUser={this.state.currentUser} /> */}
-
+          <Navigation handleLogout={this.handleLogout} currentUser={this.state.currentUser} />
+          
             <Route exact path="/dashboard" render={(props) => (
               <Dashboard
                 currentUser={this.state.currentUser}
-              />)} />
-
-
-
-
-
+            />)} />
+          
             <Route exact path="/projects" render={(props) => (
               <Projects
-              {...props}
-              currentUser={this.state.currentUser}
-              handleSubmit={this.handleCreateProject}
-              projects={this.state.projects}
-              handleDelete={this.handleDeleteProject}
-              collabFor={this.state.collabFor}
-              deleteThisProject={this.deleteThisProject}
-              />
+                {...props}
+                currentUser={this.state.currentUser}
+                handleSubmit={this.handleCreateProject}
+                projects={this.state.projects}
+                // handleDelete={this.handleDeleteProject}
+                collabFor={this.state.collabFor}
+                deleteThisProject={this.deleteThisProject}
+              >
+              </Projects>
             )} />
-
 
             <Route exact path="/projects/:project_id" render={(props) =>
               <ProjectDetails id={props.match.params.project_id} />
-            } />
+          } />
+          
             <Route exact path="/profile" render={(props) => (
               <ProfilePage
                 {...props}
@@ -324,24 +277,18 @@ class App extends React.Component {
                 handleSubmitInt={this.handleCreateInterest}
                 handleDeleteInt={this.handleDeleteInterest}
               />)}
-
-            />
+          />
+          
             <Route exact path="/search" render={(props) => (
               <Search
-              user={this.state.currentUser}
-              interests={this.state.interests}
-              skills={this.state.skills}
-              becomeCollaborator={this.addUserAsCollaborator}
-              
+                user={this.state.currentUser}
+                interests={this.state.interests}
+                skills={this.state.skills}
+                becomeCollaborator={this.addUserAsCollaborator}
               />)}
-
             />
-
-
           </>
-
         }
-
       </div>
     );
   }
