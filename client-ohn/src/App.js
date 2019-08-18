@@ -57,6 +57,8 @@ class App extends React.Component {
       interests: [],
       projects: [],
       show: false,
+      alert: ''
+      
   
     };
 
@@ -192,9 +194,36 @@ class App extends React.Component {
 
   }
 
+  deleteThisProject = () => {
+    const getAlert = () => (
+      <SweetAlert 
+      error
+      showCloseButton={true}
+      showConfirm={false}
+      closeOnClickOutside={true}
+      title="Are you sure?"
+      onCancel={(e) => { this.hideAlert(e) }}
+      onConfirm={(e) => { this.hideAlert(e) }}
+      >
+        
+      </SweetAlert>
+    );
+
+    this.setState({
+      alert: getAlert()
+    });
+  }
+
+  hideAlert = () => {
+    this.setState({
+      alert: '',
+    });
+  }
+
   handleDeleteProject = async (ev) => {
+    
+    
     const id = ev.target.name
-    console.log("hey")
     await deleteProject(id)
 
     this.setState(prevState => ({
@@ -221,9 +250,6 @@ class App extends React.Component {
       },
       collabFor: [...prevState.currentUser.collabFor.reverse(),
       resp]
-      
-     
-      
     }))
   }
 
@@ -265,13 +291,13 @@ class App extends React.Component {
 
             <Route exact path="/projects" render={(props) => (
               <Projects
-                {...props}
-                currentUser={this.state.currentUser}
-                handleSubmit={this.handleCreateProject}
-                projects={this.state.projects}
-                handleDelete={this.handleDeleteProject}
-                collabFor={this.state.collabFor}
-                
+              {...props}
+              currentUser={this.state.currentUser}
+              handleSubmit={this.handleCreateProject}
+              projects={this.state.projects}
+              handleDelete={this.handleDeleteProject}
+              collabFor={this.state.collabFor}
+              deleteThisProject={this.deleteThisProject}
               />
             )} />
 

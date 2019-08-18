@@ -61,13 +61,14 @@ class Projects extends React.Component {
         <ModalProject currentUser={this.props.currentUser} handleSubmit={this.props.handleSubmit} />
         
          <ProjectList 
-            currentUser={this.props.currentUser}
-            projects={this.props.projects}
-            handleDelete={this.props.handleDelete}
-            handleClick={this.handleClick}
-            isFlipped={this.state.isFlipped}
-            collabFor={this.props.collabFor} />
-         
+          currentUser={this.props.currentUser}
+          projects={this.props.projects}
+          handleDelete={this.props.handleDelete}
+          handleClick={this.handleClick}
+          isFlipped={this.state.isFlipped}
+          collabFor={this.props.collabFor}
+          deleteThisProject={this.props.deleteThisProject}/>
+        
         <Link to='/dashboard'>Back</Link>
       </div>
     )

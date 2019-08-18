@@ -16,7 +16,7 @@ const ProjectList = props => {
         
         (<div key={project.id} className="project-list">
           
-          <ProjectFlippingCard date={project.created_at} project={project} handleDelete={props.handleDelete} currentUser={props.currentUser}></ProjectFlippingCard>
+          <ProjectFlippingCard date={project.created_at} project={project} handleDelete={props.handleDelete} deleteThisProject={props.deleteThisProject}currentUser={props.currentUser}></ProjectFlippingCard>
         </div>
         ))}
       <hr />

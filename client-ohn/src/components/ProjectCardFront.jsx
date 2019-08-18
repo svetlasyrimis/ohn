@@ -19,7 +19,7 @@ const ProjectCardFront = (props) => {
 
   return (
     <div className="project-card">
-      
+
       <p>Project name : {props.project.name}</p>
       <p>Description {props.project.description}</p>
 
@@ -27,7 +27,7 @@ const ProjectCardFront = (props) => {
 
       <button onClick={props.handleClick}>OHNers</button>
       <br />
-      {isOwner && <button name={props.project.id} onClick={props.handleDelete}>Delete a project</button>}
+      {isOwner && <button name={props.project.id} onClick={(e) => { props.deleteThisProject(e);props.handleDelete() }}>Delete project</button>}
       {(!isOwnerOrCollaborator && !props.isAdded) && <button className="btn-outline-dark" name={props.project.id} onClick={(e) => { e.preventDefault(); props.handleAdd(e); props.becomeCollaborator(e) }}>Join Project</button>}
       {props.isAdded && <p className="bold" name={props.project.id}>Added</p>}
       <Link to={`/projects/${parseInt(props.project.id)}`}>See More</Link>

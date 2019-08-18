@@ -37,6 +37,8 @@ class ProjectOnlyForm extends React.Component {
       }
     })
     console.log(this.state.projectData)
+    this.props.handleClose()
+     
   }
 
   

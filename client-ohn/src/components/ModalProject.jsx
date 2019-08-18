@@ -14,11 +14,11 @@ export default function ModalProject(props) {
         Add new project
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}> 
         <Modal.Header closeButton>
           <Modal.Title>New Project</Modal.Title>
         </Modal.Header>
-        <Modal.Body><ProjectOnlyForm currentUser={props.currentUser} handleSubmit={props.handleSubmit}/></Modal.Body>
+        <Modal.Body><ProjectOnlyForm currentUser={props.currentUser} handleSubmit={props.handleSubmit} handleClose={handleClose}/></Modal.Body>
         
       </Modal>
     </>
