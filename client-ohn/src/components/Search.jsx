@@ -35,9 +35,9 @@ export default class Search extends React.Component {
     })
     } catch (error) {
       console.log(error)
-      // this.setState({
-      //   errorMessage: results
-      // })
+      this.setState({
+        errorMessage: "Sorry, no results found. Try again."
+      })
     }
     
   }
