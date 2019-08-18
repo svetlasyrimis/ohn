@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import logo from '../assets/logo.png'
+
 
 // This component handles our register form
 const Register = (props) => {
 
   return (
+    <div className="container">
+    <div><img src={logo} alt="logo" className="logo" /></div>
     <div className="auth-container">
       <h2>Register</h2>
       <hr />
@@ -19,6 +23,7 @@ const Register = (props) => {
         <input type="submit" value="Register"></input>
         <Link to="/">Login</Link>
       </form>
+    </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import ProjectFlippingCard from './ProjectFlippingCard';
 
 const ProjectList = props => {
-  console.log(props.collabFor)
+  
   
   if (props.projects.length === 0 && props.collabFor.length === 0) {
     return <p>Your list is empty</p>

@@ -27,12 +27,14 @@ input {
   width: 70px;
   height: 70px;
   object-fit: cover;
+  
+  
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
-  background:
+  /* background:
     radial-gradient(rgba(0, 0, 0, 0.2) 3px, transparent 4px),
     radial-gradient(rgba(0, 0, 0, 0.1) 3px, transparent 4px),
     linear-gradient(#fff 4px, transparent 0),
@@ -40,11 +42,30 @@ body {
     linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
     #fff;
     background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
-    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px; */
+    background: url('http://library.skc.edu/wp-content/uploads/2015/06/Dollarphotoclub_70724536-1.jpg') no-repeat center center fixed; 
+    /* filter: grayscale(100%); */
+    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
-
-
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(240, 238, 238, 0.938);
+  margin-top: 20px;
+  
+  width: 300px;
+}
+.auth-container {
+  
+  /* width: fit-content; */
+}
 .flex-column {
   display: flex;
   flex-direction: column;

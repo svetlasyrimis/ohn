@@ -9,8 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
 import ProjectDetails from './components/ProjectDetails'
 import Search from './components/Search'
+import SweetAlert from 'react-bootstrap-sweetalert'
 
-import 'react-router-modal/css/react-router-modal.css'
+// import 'react-router-modal/css/react-router-modal.css'
 
 
 import {
@@ -108,7 +109,7 @@ class App extends React.Component {
       collabFor: userData.collabFor,
       isLoggedIn: true
     })
-    console.log(this.state.collabFor)
+    // console.log(this.state.collabFor)
     this.props.history.push("/dashboard")
   }
   handleChange = ev => {
@@ -128,6 +129,13 @@ class App extends React.Component {
     localStorage.removeItem("authToken");
     this.setState({
       currentUser: null,
+      isLoggedIn: false,
+      authFormData: {
+        username: "",
+        email: "",
+        password: ""
+      }
+
       
     })
     this.props.history.push("/")
@@ -222,7 +230,7 @@ class App extends React.Component {
 
   handleDeleteProject = async (ev) => {
     
-    
+    console.log("Deleted")
     const id = ev.target.name
     await deleteProject(id)
 
@@ -277,7 +285,7 @@ class App extends React.Component {
 
         {this.state.currentUser &&
           <>
-            <Navigation handleLogout={this.handleLogout} />
+            <Navigation handleLogout={this.handleLogout} currentUser={this.state.currentUser}/>
             {/* <Dashboard currentUser={this.state.currentUser} /> */}
 
             <Route exact path="/dashboard" render={(props) => (
