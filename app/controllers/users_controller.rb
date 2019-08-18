@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       skills: @current_user.skills,
       interests: @current_user.interests,
       projects: getUserProjects(@current_user, true),
-      colabFor: getUserProjects(@current_user, false)
+      collabFor: getUserProjects(@current_user, false)
     }
 
     render json: @user

@@ -3,12 +3,11 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
 import ProjectDetails from './components/ProjectDetails'
-import Button from 'react-bootstrap/Button';
 import Search from './components/Search'
 
 import 'react-router-modal/css/react-router-modal.css'
@@ -57,12 +56,18 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
-      show: false
-
+      show: false,
+  
     };
 
   }
 
+  // handleClick = () => {
+  //   this.setState(state => ({
+  //     isToggleOn: !state.isToggleOn
+  //   }));
+  // }
+  
   async componentDidMount() {
     const user = await verifyUser();
     if (user) {
@@ -72,33 +77,24 @@ class App extends React.Component {
         projects: user.projects.reverse(),
         skills: user.skills,
         interests: user.interests,
-        // collabFor: this.removeDuplicates(user.colabFor),
+       
+        collabFor: user.collabFor,
         
       })
-      console.log(this.state.projects)
+      // console.log(this.state.collabFor)
       // const skills = await getSkills(this.state.currentUser.id)
       // const interests = await getInterests(this.state.currentUser.id)
 
     } else {
       this.props.history.push("/")
     }
-
-    // console.log(this.state.skills)
   }
-
-  // removeDuplicates = (array, prop) => {
-  //   return array.filter((obj, position, arr) => {
-  //     return arr.map(mapObj => mapObj[prop].indexOf(obj[prop]) === position)
-  //   });
-  // }
-  
-
 
   // Auth
 
-  handleLoginButton = () => {
-    this.props.history.push("/login")
-  }
+  // handleLoginButton = () => {
+  //   this.props.history.push("/login")
+  // }
 
   handleLogin = async () => {
     const userData = await loginUser(this.state.authFormData);
@@ -107,10 +103,10 @@ class App extends React.Component {
       skills: userData.skills,
       interests: userData.interests,
       projects: userData.projects,
-      // collabFor: this.removeDuplicates(userData.colabFor),
+      collabFor: userData.collabFor,
       isLoggedIn: true
     })
-    console.log(this.state.userData)
+    console.log(this.state.collabFor)
     this.props.history.push("/dashboard")
   }
   handleChange = ev => {
@@ -129,7 +125,8 @@ class App extends React.Component {
   handleLogout = () => {
     localStorage.removeItem("authToken");
     this.setState({
-      currentUser: null
+      currentUser: null,
+      
     })
     this.props.history.push("/")
   }
@@ -211,19 +208,26 @@ class App extends React.Component {
     ev.preventDefault();
     const projectId = ev.target.name
     const resp = await becomeCollaborator(projectId)
+  
+    
     this.setState(prevState => ({
       currentUser: {
         ...prevState.currentUser,
-        colabFor: [
-          ...prevState.currentUser.colabFor,
+        collabFor: [
+          ...prevState.currentUser.collabFor,
           resp
-        ]
-      }
+        ],
+       
+      },
+      collabFor: [...prevState.currentUser.collabFor.reverse(),
+      resp]
+      
+     
+      
     }))
-
-
   }
 
+  
   //task 
 
 
@@ -266,8 +270,8 @@ class App extends React.Component {
                 handleSubmit={this.handleCreateProject}
                 projects={this.state.projects}
                 handleDelete={this.handleDeleteProject}
-
-
+                collabFor={this.state.collabFor}
+                
               />
             )} />
 
@@ -290,10 +294,11 @@ class App extends React.Component {
             />
             <Route exact path="/search" render={(props) => (
               <Search
-                user={this.state.currentUser}
-                interests={this.state.interests}
-                skills={this.state.skills}
-                addUserAsCollaborator={this.addUserAsCollaborator}
+              user={this.state.currentUser}
+              interests={this.state.interests}
+              skills={this.state.skills}
+              becomeCollaborator={this.addUserAsCollaborator}
+              
               />)}
 
             />

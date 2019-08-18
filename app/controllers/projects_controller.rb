@@ -11,12 +11,21 @@ class ProjectsController < ApplicationController
   def search
     @projects = Project.where("name LIKE ?", "%#{params[:search]}%")
     p @projects
-    @filteredProjects = @projects.select do |project|
-      nil == project.collaborators.find do |colab|
-        colab.isOwner == true && colab.user_id == @current_user.id
+    # if @projects.length == 0  
+    
+      @filteredProjects = @projects.select do |project|
+        nil == project.collaborators.find do |colab|
+          (colab.isOwner == true && colab.user_id == @current_user.id) || 
+          (colab.isOwner == false && colab.user_id == @current_user.id)
+        end
       end
-    end
-    render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
+      if @filteredProjects == []
+          render json: { message: 'Sorry, no results found. Try again.' }, status: 404
+      else 
+      render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
+      end
+    
+  
   end
  
   def show
@@ -34,9 +43,15 @@ class ProjectsController < ApplicationController
   end
   
   def add_collaborator 
-    @collaborator = Collaborator.new(user: @current_user, project: @project, isOwner:false)
-    @collaborator.save
-    render json: @project, include: [:tasks, {collaborators: {include: [:user]}}], status: :created
+    
+    # @collaborator = Collaborator.new(user: @current_user, project: @project, isOwner:false)
+    if Collaborator.where(user: @current_user, project: @project, isOwner:false).exists?
+      render json: "Already been created"
+    else  
+      @collaborator = Collaborator.new(user: @current_user, project: @project, isOwner:false)
+      @collaborator.save
+      render json: @project, include: [:tasks, {collaborators: {include: [:user]}}], status: :created
+    end 
   end
 
   

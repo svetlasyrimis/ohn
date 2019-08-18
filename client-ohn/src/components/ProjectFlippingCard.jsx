@@ -1,18 +1,21 @@
 import React from 'react'
-import ProjectList from './ProjectList';
-import { Link } from 'react-router-dom';
-import ModalProject from './ModalProject';
 import ReactCardFlip from 'react-card-flip';
 import ProjectCardFront from './ProjectCardFront';
 import ProjectCardBack from './ProjectCardBack'
 
 //This component contains the modal with the project form, project List that renders all the projects and Link to close it
 class ProjectFlippingCard extends React.Component {
+  
   constructor(props) {
+    
     super(props)
     this.state = {
       isFlipped: false,
-      project: this.props.project
+      isAdded:false,
+      project: this.props.project,
+      collabFor: this.props.collabFor,
+      collaborators: this.props.collaborators,
+      
     }
   }
 
@@ -22,14 +25,25 @@ class ProjectFlippingCard extends React.Component {
       isFlipped: !prevState.isFlipped
     }));
   }
+  handleAdd = () => {
+    // ev.preventDefault();
+    this.setState(prevState => ({
+      isAdded: !prevState.isAdded
+    }));
+  }
 
+  // handleAddCollaboratorSubmit = (ev) => {
+  //   ev.preventDefault();
+  //   this.handleAdd();
+  //   this.props.becomeCollaborator()
+  // }
   render() {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
 
-        <ProjectCardFront handleClick={this.handleClick} handleDelete={this.props.handleDelete} project={this.state.project} key="front"></ProjectCardFront>
-
-        <ProjectCardBack key="back" date={this.props.date} handleClick={this.handleClick}  project={this.state.project}></ProjectCardBack>
+        <ProjectCardFront handleClick={this.handleClick} handleDelete={this.props.handleDelete} project={this.state.project} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator} handleAdd={this.handleAdd} isAdded={this.state.isAdded}key="front"></ProjectCardFront>
+         
+        <ProjectCardBack key="back" date={this.props.date} handleClick={this.handleClick} project={this.state.project} handleAdd={this.handleAdd} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator}></ProjectCardBack>
 
       </ReactCardFlip>
     )

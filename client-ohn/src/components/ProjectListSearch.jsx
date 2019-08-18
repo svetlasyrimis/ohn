@@ -1,9 +1,8 @@
 import React from 'react';
 import ProjectFlippingCard from './ProjectFlippingCard';
-import Button from 'react-bootstrap/Button'
 
 const ProjectListSearch = props => {
-  console.log(props)
+  // console.log(props)
   return (
     
     <div className="flex-column project-list">
@@ -11,8 +10,17 @@ const ProjectListSearch = props => {
 
         (<div key={project.id} className="project-list">
           
-          <ProjectFlippingCard date={project.created_at} project={project} handleDelete={props.handleDelete}></ProjectFlippingCard>
-          <button className="btn-outline-dark" name={project.id} onClick={props.becomeCollaborator}>Add to your projects</button>
+          <ProjectFlippingCard 
+            date={project.created_at}
+            project={project}
+            handleDelete={props.handleDelete}
+            currentUser={props.currentUser}
+            becomeCollaborator={props.becomeCollaborator}
+            
+          ></ProjectFlippingCard>
+          {/* <Link to></Link> */}
+         
+          
         </div>
         ))}
 

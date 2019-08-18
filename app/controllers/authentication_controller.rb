@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
       token = encode(id: @user.id, username: @user.username)
       render json: { token: token , user: {id: @user.id, username: @user.username, email: @user.email, skills: @user.skills, interests: @user.interests,
       projects: getUserProjects(@user, true),
-      colabFor: getUserProjects(@user, false)
+      collabFor: getUserProjects(@user, false)
       }}, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized

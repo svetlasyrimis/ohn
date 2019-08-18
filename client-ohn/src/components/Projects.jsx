@@ -5,7 +5,9 @@ import ModalProject from './ModalProject'
 
 //This component contains the modal with the project form, project List that renders all the projects and Link to close it
 class Projects extends React.Component {
+  
   constructor(props) {
+    console.log(props)
     super(props) 
     this.state = {
       projectData: {
@@ -13,8 +15,10 @@ class Projects extends React.Component {
         description: ''
       },
       isFlipped:false,
-      projects: this.props.projects
+      // projects: this.props.projects,
+      // collabFor: this.props.collabFor
     }
+    console.log(this.props.collabFor)
   }
 
   handleClick = (e) => {
@@ -55,11 +59,15 @@ class Projects extends React.Component {
       <div>
         
         <ModalProject currentUser={this.props.currentUser} handleSubmit={this.props.handleSubmit} />
-        <ProjectList
-          projects={this.props.projects}
-          handleDelete={this.props.handleDelete} 
-          handleClick={this.handleClick}
-          isFlipped={this.state.isFlipped} />
+        
+         <ProjectList 
+            currentUser={this.props.currentUser}
+            projects={this.props.projects}
+            handleDelete={this.props.handleDelete}
+            handleClick={this.handleClick}
+            isFlipped={this.state.isFlipped}
+            collabFor={this.props.collabFor} />
+         
         <Link to='/dashboard'>Back</Link>
       </div>
     )
