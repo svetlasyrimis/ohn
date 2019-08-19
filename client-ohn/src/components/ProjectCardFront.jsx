@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 const ProjectCardFront = (props) => {
 
   let creator = props.project.collaborators.filter(collaborator => collaborator.isOwner)[0].user.username
-
+  
+  console.log(creator)
   let isCollaborator = props.project.collaborators.filter(collaborator => collaborator.user.username === props.currentUser.username).length > 0
 
   // console.log("isCollaborator=", isCollaborator)
@@ -18,12 +19,13 @@ const ProjectCardFront = (props) => {
   // console.log("isOwnerOrCollaborator=", isOwnerOrCollaborator)
 
   return (
+    
     <div className="project-card">
-
+      
       <p>Project name : {props.project.name}</p>
       <p>Description: {props.project.description}</p>
       <p>Creator: {creator} </p>
-      {/* <button name={props.project.id} onClick={props.handleDelete}>Delete a project</button> */}
+    
 
       <button onClick={props.handleClick}>OHNers</button>
       <br />
@@ -34,6 +36,7 @@ const ProjectCardFront = (props) => {
       {(!isOwnerOrCollaborator && !props.isAdded) && <button className="btn-outline-dark" name={props.project.id} onClick={(e) => { e.preventDefault(); props.handleAdd(e); props.becomeCollaborator(e) }}>Join Project</button>}
       {props.isAdded && <p className="bold" name={props.project.id}>Added</p>}
       <Link to={`/projects/${parseInt(props.project.id)}`}>See More</Link>
+      
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
-import { Redirect,Route } from 'react-router-dom';
+import {  Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
@@ -95,7 +95,7 @@ class App extends React.Component {
         initAlert: true,
         editProfileMessage: "Edit your profile by adding your skills and interests"
       })
-      if (this.state.skills.length === 0 || this.state.interests.length === 0 ) {
+      if (this.state.skills.length === 0 || this.state.interests.length === 0) {
         this.props.history.push("/profile")
       } else {
         this.props.history.push("/dashboard")
@@ -106,8 +106,8 @@ class App extends React.Component {
         errorLogin: "Invalid username or password. Try again."
       })
     }
-    
-    
+
+
   }
 
   handleChange = ev => {
@@ -130,7 +130,7 @@ class App extends React.Component {
       })
       // console.log(this.state.errorRegister)
     }
-    
+
   }
 
   handleLogout = () => {
@@ -263,7 +263,7 @@ class App extends React.Component {
 
 
   render() {
-    
+
     return (
       <div className="App">
         <Route exact path="/" render={() => (
@@ -276,7 +276,7 @@ class App extends React.Component {
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
             formData={this.state.authFormData} />)} />
-         {this.state.errorLogin !== "" && (<SweetAlert
+        {this.state.errorLogin !== "" && (<SweetAlert
           error
           showCloseButton={true}
           showConfirm={false}
@@ -285,9 +285,9 @@ class App extends React.Component {
           title="Invalid username or password. Try again."
           onCancel={(e) => { this.hideAlert(e) }}
           onConfirm={(e) => { this.hideAlert(e) }}>
-          
-          
-          
+
+
+
         </SweetAlert>)}
         {this.state.errorRegister && (<SweetAlert
           error
@@ -299,21 +299,10 @@ class App extends React.Component {
           title="Error"
           onCancel={(e) => { this.hideAlert(e) }}
           onConfirm={(e) => { this.hideAlert(e) }}>{this.state.errorRegister}</SweetAlert>)}
-        
 
-        {this.state.initAlert && !this.state.skills.length && !this.state.interests.length &&
-         
-          (<SweetAlert
-          success
-          showConfirm={false}
-          closeOnClickOutside={true}
-          timeout={3000}
-          title="Successfully logged in"
-          onCancel={(e) => { this.hideAlert(e) }}
-          onConfirm={(e) => { this.hideAlert(e) }}>
-          {this.state.editProfileMessage}
-          </SweetAlert>)}
-        {this.state.initAlert && this.state.skills.length && this.state.interests.length &&
+
+        {this.state.initAlert && (this.state.skills.length === 0 ||this.state.interests.length === 0) &&
+
           (<SweetAlert
             success
             showConfirm={false}
@@ -322,25 +311,36 @@ class App extends React.Component {
             title="Successfully logged in"
             onCancel={(e) => { this.hideAlert(e) }}
             onConfirm={(e) => { this.hideAlert(e) }}>
-            
-            </SweetAlert>)
+            {this.state.editProfileMessage}
+          </SweetAlert>)}
+        {this.state.initAlert && this.state.skills.length !== 0 && this.state.interests.length !== 0 && (
+          <SweetAlert
+            success
+            showConfirm={false}
+            closeOnClickOutside={true}
+            timeout={3000}
+            title="Successfully logged in"
+            onCancel={(e) => { this.hideAlert(e) }}
+            onConfirm={(e) => { this.hideAlert(e) }}>
+
+          </SweetAlert>)
         }
-        {this.state.currentUser && 
+        {this.state.currentUser &&
           <>
-          
-          <Navigation
-            handleLogout={this.handleLogout}
-            currentUser={this.state.currentUser}
-            handleClick={this.handleClick}/>
-            
-            
+
+            <Navigation
+              handleLogout={this.handleLogout}
+              currentUser={this.state.currentUser}
+              handleClick={this.handleClick} />
+
+
             <Route exact path="/dashboard" render={(props) => (
               <Dashboard
-              currentUser={this.state.currentUser}
-              
-            />)} />
-          
-            <p className="greeting" >Build anything</p>
+                currentUser={this.state.currentUser}
+
+              />)} />
+
+            <p className="greeting">Build anything</p>
             <Route exact path="/projects" render={(props) => (
               <Projects
                 {...props}
@@ -356,8 +356,8 @@ class App extends React.Component {
 
             <Route exact path="/projects/:project_id" render={(props) =>
               <ProjectDetails id={props.match.params.project_id} />
-          } />
-          
+            } />
+
             <Route exact path="/profile" render={(props) => (
               <ProfilePage
                 {...props}
@@ -369,8 +369,8 @@ class App extends React.Component {
                 handleSubmitInt={this.handleCreateInterest}
                 handleDeleteInt={this.handleDeleteInterest}
               />)}
-          />
-          
+            />
+
             <Route exact path="/search" render={(props) => (
               <Search
                 user={this.state.currentUser}

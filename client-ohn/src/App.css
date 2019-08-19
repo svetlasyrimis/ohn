@@ -312,6 +312,13 @@ input {
   background-color: #848EA2;
 
 }
+
+.btn-outline-info {
+  padding: .5rem 1rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  border-radius: .3rem
+}
 /* nav.sidebar {
   -webkit-transition: margin 200ms ease-out;
   -moz-transition: margin 200ms ease-out;

@@ -26,14 +26,13 @@ export default class Search extends React.Component {
 
     ev.preventDefault();
     try {
+
       const results = await searchForProjects(this.state.keyword)
       // debugger;
       console.log(results)
       this.setState({
         projects: results,
-        searchData: {
-          keyword: ""
-        },
+        keyword: ""
       })
     } catch (error) {
       console.log(error)
@@ -42,7 +41,7 @@ export default class Search extends React.Component {
         keyword:''
       })
     }
-
+    console.log(this.state.projects)
   }
   
   hideAlert = () => {
@@ -58,8 +57,8 @@ export default class Search extends React.Component {
     return (
       <div className="search-container">
         <form onSubmit={this.handleSearchSubmit} className="flex-row-center">
-          <input type="text" name="keyword" className="search-form-item" value={this.state.keyword} onChange={this.handleChange} />
-          <button variant="outline-info" className="call-for-action search-form-item"  >Search for a project</button>
+          <input type="text" name="keyword" className="search-form-item" value={this.state.keyword} onChange={this.handleChange} placeholder="Enter a keyword" size="30" required/>
+          <button className="call-for-action search-form-item btn-outline-info">Search for a project</button>
         </form>
         {this.state.errorMessage !== "" && (<SweetAlert
           error

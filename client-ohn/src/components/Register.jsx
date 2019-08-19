@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import ReactPasswordStrength from 'react-password-strength';
-import { InputGroup, FormControl } from 'react-bootstrap'
 
-// This component handles our register form
+
+
 const Register = (props) => {
 
   return (
