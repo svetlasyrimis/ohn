@@ -10,13 +10,11 @@ a {
   padding: 10px;
   text-decoration: none;
 }
-
-/* button {
-  margin: 20px;
+a:-webkit-any-link{
+  text-decoration: none;
 }
-input {
-  margin: 20px;
-}  */
+
+
 #dropdown-button {
   background-color: #848EA2;
   border:none;
@@ -24,20 +22,51 @@ input {
 #dropdown-button:hover {
   background-color: black;
 }
-
+#dropdown-button:active  {
+  background-color: #848EA2;
+}
+.dropdown-item:active .logout:active {
+  background-color: #848EA2;
+}
+.dropdown-item:active {
+  background-color: #848EA2;
+}
+.dashboard-buttons{
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.call-for-action {
+  font-weight: 400;
+  letter-spacing: 1px;
+  background-color: #f8f9fa;
+}
 /* .dropdown-toggle {
   background-color: black;
 } */
 /* .dropdown-toggle,.btn-primary, .btn-lg{
   background-color: #848EA2;
 } */
+.dashboard-buttons, .project-board {
+  
+  
+
+}
+
 .nav-bar {
-  margin: 5px;
+  top:0;
+  background-color: #f8f9fa70;
   padding:10px;
+  position: fixed;
+  width:100%;
+  z-index: 99;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .logo {
@@ -51,6 +80,7 @@ input {
 body {
   margin: 0;
   overflow-x: hidden;
+  font-family: 'ABeeZee', sans-serif;
   /* background:
     radial-gradient(rgba(0, 0, 0, 0.2) 3px, transparent 4px),
     radial-gradient(rgba(0, 0, 0, 0.1) 3px, transparent 4px),
@@ -78,7 +108,7 @@ body {
   margin-top: 20px;
   padding-top:20px;
   padding-bottom:20px;
-  width: 300px;
+  width: 400px;
 }
 .auth-container {
   
@@ -103,6 +133,12 @@ body {
   justify-content: space-around;
   align-items: center;
 }
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 /* .input-description {
   width: 250px;
   height: 150px;
@@ -125,16 +161,20 @@ br {
   font-weight: bold;
   font-size: 26px;
 }
+
+.user-info {
+  
+  min-height: 300px;
+}
 .greeting {
   font-size: 24px;
+  margin:40px;
+  padding: 0;
+  transition: all .5s ease-in;
+  animation: text 4s linear 0.5s 1 normal forwards;
   
-  /* transition: all .5s ease-in; */
-  /* animation: text  5s ease-in-out; */
-  animation: text 3s ease-in-out 1s;
-  animation-fill-mode: both;
-  /* transition: visibility 0s 2s, opacity 2s linear; */
 }
-@keyframes fade {
+/* @keyframes fade {
   0%,100% { opacity: 0 }
   50% { opacity: 1 }
 }
@@ -145,39 +185,41 @@ br {
 .garbage{
   background-color:red;
   border-radius: 20%;
-}
+} */
 
 @keyframes text {
-  50% {
-    color: black;
-    
-    letter-spacing: 25px;
-    opacity: 1;
-    transform: rotateY(180deg) scale(1.2);
-    
-  }
-  24% {
-    letter-spacing: 15px;
-    margin-bottom: 10px;
-    opacity:0;
+  
+  25% {
+    letter-spacing: 12px;
+    margin-bottom: 1rem;
+    opacity:0.5;
+    transform: rotateX(90deg) scale(1.1) translate3d(0rem,0rem,0);;
 
+  }
+  50% {
+    letter-spacing: 18px;
+    opacity: 1;
+    text-shadow: 0 0 40px rgb(235, 145, 145);
   }
   75% {
     opacity: 0.5;
+    letter-spacing: 15px;
+    opacity:1;
+    transform:translate3d(0rem,0rem,0);
+  } 
+  90% {
+    opacity: 0.5;
     letter-spacing: 10px;
     opacity:1;
-    bottom: -5rem;
-  } 
+    font-weight: bold;
+  }
   100% {
-    
-    margin-bottom: 20px;
     letter-spacing: 6px; 
-    
     opacity: 0;
   }
 }
 
-@keyframes bottomFadeOut {
+/* @keyframes bottomFadeOut {
   0% {
     position: absolute;
     bottom: -5rem;
@@ -194,21 +236,9 @@ br {
     opacity: 0;
   }
   
-}
+} */
 
-@keyframes smoky-mirror {
-  60% {
-    text-shadow: 0 0 40px whitesmoke; }
-  to {
-    transform:
-      translate3d(18rem,8rem,0)
-      rotate(40deg) 
-      skewX(70deg)
-      scale(2);
-     text-shadow: 0 0 20px whitesmoke;
-    opacity: 0;
-  }
-}
+
 
 input {
   padding: 5px;
@@ -221,12 +251,12 @@ input {
   align-self: flex-start;
 }
 
-.vertical-hr {  
-  /* border: none; */
+/* .vertical-hr {  
+  
   border-right: 2px solid hsla(200, 10%, 50%,100);
   height:30vh;
   margin: -10px;     
-}
+} */
 
 .project-card, .project-details-items{
   -webkit-box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.75);
@@ -246,6 +276,11 @@ input {
   align-items: center;
 
 }
+.project-board, .search-container {
+  padding: 20px;
+  margin-top:70px;
+}
+
 .project-details-container {
   
   
@@ -263,9 +298,25 @@ input {
   margin: 10px;
 }
 
+.search-form-item{
+  margin:8px;
+  
+}
+
+.error {
+  /* width: 500px !important; */
+  background-color: pink !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: #848EA2;
+
+}
 /* nav.sidebar {
   -webkit-transition: margin 200ms ease-out;
   -moz-transition: margin 200ms ease-out;
   -o-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
 } */
+
+/* textarea on mobile width:webkit-fill-available; background-color: color */

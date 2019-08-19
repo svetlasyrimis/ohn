@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
-import { Route } from 'react-router-dom';
+import { Redirect,Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
@@ -57,6 +57,8 @@ class App extends React.Component {
       skills: [],
       interests: [],
       projects: [],
+      errorLogin: '',
+      initAlert: false
     };
 
   }
@@ -81,16 +83,31 @@ class App extends React.Component {
   }
 
   handleLogin = async () => {
-    const userData = await loginUser(this.state.authFormData);
-    this.setState({
-      currentUser: userData,
-      skills: userData.skills,
-      interests: userData.interests,
-      projects: userData.projects,
-      collabFor: userData.collabFor,
-      isLoggedIn: true
-    })
-    this.props.history.push("/dashboard")
+    try {
+      const userData = await loginUser(this.state.authFormData);
+      this.setState({
+        currentUser: userData,
+        skills: userData.skills,
+        interests: userData.interests,
+        projects: userData.projects,
+        collabFor: userData.collabFor,
+        isLoggedIn: true,
+        initAlert: true,
+        editProfileMessage: "Edit your profile by adding your skills and interests"
+      })
+      if (this.state.skills.length === 0 || this.state.interests.length === 0 ) {
+        this.props.history.push("/profile")
+      } else {
+        this.props.history.push("/dashboard")
+      }
+    } catch (e) {
+      console.log(e)
+      this.setState({
+        errorLogin: "Invalid username or password. Try again."
+      })
+    }
+    
+    
   }
 
   handleChange = ev => {
@@ -102,8 +119,18 @@ class App extends React.Component {
 
   handleRegister = async (e) => {
     e.preventDefault();
-    await registerUser(this.state.authFormData);
-    this.handleLogin();
+    try {
+      const resp = await registerUser(this.state.authFormData);
+      this.handleLogin();
+      console.log(resp)
+    } catch (er) {
+      console.log(er.response.data)
+      this.setState({
+        errorRegister: er.response.data.join('.')
+      })
+      // console.log(this.state.errorRegister)
+    }
+    
   }
 
   handleLogout = () => {
@@ -225,8 +252,18 @@ class App extends React.Component {
     }))
   }
 
-  render() {
+  hideAlert = () => {
+    console.log('Hiding alert...');
+    this.setState({
+      errorLogin: "",
+      initAlert: false,
+      errorRegister: ""
+    });
+  }
 
+
+  render() {
+    
     return (
       <div className="App">
         <Route exact path="/" render={() => (
@@ -239,16 +276,71 @@ class App extends React.Component {
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
             formData={this.state.authFormData} />)} />
-
-        {this.state.currentUser &&
-          <>
-          <Navigation handleLogout={this.handleLogout} currentUser={this.state.currentUser} />
+         {this.state.errorLogin !== "" && (<SweetAlert
+          error
+          showCloseButton={true}
+          showConfirm={false}
+          closeOnClickOutside={true}
+          timeout={3000}
+          title="Invalid username or password. Try again."
+          onCancel={(e) => { this.hideAlert(e) }}
+          onConfirm={(e) => { this.hideAlert(e) }}>
           
+          
+          
+        </SweetAlert>)}
+        {this.state.errorRegister && (<SweetAlert
+          error
+          showCloseButton={true}
+          showConfirm={false}
+          closeOnClickOutside={true}
+          timeout={3000}
+          customClass="error"
+          title="Error"
+          onCancel={(e) => { this.hideAlert(e) }}
+          onConfirm={(e) => { this.hideAlert(e) }}>{this.state.errorRegister}</SweetAlert>)}
+        
+
+        {this.state.initAlert && !this.state.skills.length && !this.state.interests.length &&
+         
+          (<SweetAlert
+          success
+          showConfirm={false}
+          closeOnClickOutside={true}
+          timeout={3000}
+          title="Successfully logged in"
+          onCancel={(e) => { this.hideAlert(e) }}
+          onConfirm={(e) => { this.hideAlert(e) }}>
+          {this.state.editProfileMessage}
+          </SweetAlert>)}
+        {this.state.initAlert && this.state.skills.length && this.state.interests.length &&
+          (<SweetAlert
+            success
+            showConfirm={false}
+            closeOnClickOutside={true}
+            timeout={3000}
+            title="Successfully logged in"
+            onCancel={(e) => { this.hideAlert(e) }}
+            onConfirm={(e) => { this.hideAlert(e) }}>
+            
+            </SweetAlert>)
+        }
+        {this.state.currentUser && 
+          <>
+          
+          <Navigation
+            handleLogout={this.handleLogout}
+            currentUser={this.state.currentUser}
+            handleClick={this.handleClick}/>
+            
+            
             <Route exact path="/dashboard" render={(props) => (
               <Dashboard
-                currentUser={this.state.currentUser}
+              currentUser={this.state.currentUser}
+              
             />)} />
           
+            <p className="greeting" >Build anything</p>
             <Route exact path="/projects" render={(props) => (
               <Projects
                 {...props}

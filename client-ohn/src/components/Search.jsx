@@ -2,6 +2,8 @@ import React from 'react'
 import { searchForProjects } from '../services/search';
 import ProjectListSearch from './ProjectListSearch'
 import SweetAlert from 'react-bootstrap-sweetalert/lib/dist/SweetAlert';
+import Button from 'react-bootstrap/Button'
+
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -54,10 +56,10 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSearchSubmit}>
-          <input type="text" name="keyword" value={this.state.keyword} onChange={this.handleChange} />
-          <input type="submit" value="Search for a project" />
+      <div className="search-container">
+        <form onSubmit={this.handleSearchSubmit} className="flex-row-center">
+          <input type="text" name="keyword" className="search-form-item" value={this.state.keyword} onChange={this.handleChange} />
+          <button variant="outline-info" className="call-for-action search-form-item"  >Search for a project</button>
         </form>
         {this.state.errorMessage !== "" && (<SweetAlert
           error

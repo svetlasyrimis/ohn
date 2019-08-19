@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   end
 
   def search
-    @projects = Project.where("name LIKE ?", "%#{params[:search]}%")
+    @projects = Project.where("name ILIKE ?", "%#{params[:search]}%")
     p @projects
     # if @projects.length == 0  
     

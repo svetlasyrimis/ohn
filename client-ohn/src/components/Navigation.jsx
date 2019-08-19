@@ -14,11 +14,12 @@ const Navigation = props => {
 
       <Link to='/dashboard'><img src={logo} alt="logo" className="logo" /></Link>
       {/* <Link to='/profile'><Button variant="outline-info">Your Profile</Button></Link> */}
+      
       <DropdownButton size="lg" id="dropdown-button" alignRight  title={props.currentUser.username}>
         <Dropdown.Item href="/profile" as={Link} to='/profile' >Your Profile</Dropdown.Item>
         <Dropdown.Item href="/projects" as={Link} to='/projects'>Project Board</Dropdown.Item>
         <Dropdown.Item href="/search" as={Link} to='/search'>Join a Project</Dropdown.Item>
-        <Dropdown.Item as={Button} onClick={props.handleLogout}>Logout</Dropdown.Item>
+        <Dropdown.Item className="logout" as={Button} onClick={props.handleLogout}>Logout</Dropdown.Item>
       </DropdownButton>
       {/* <Button variant="outline-dark" onClick={props.handleLogout}>Logout</Button> */}
 

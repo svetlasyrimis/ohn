@@ -13,7 +13,7 @@ import InterestList from './InterestList'
 export default function ProfilePage(props) {
   return (
     <div>
-      <div className="user-info">
+      <div className="user-info flex-column">
         
         <p className="bold">Username : {props.user.username}</p>
         <p className="bold">Email : {props.user.email}</p>

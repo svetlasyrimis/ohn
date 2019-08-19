@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-
+import ReactPasswordStrength from 'react-password-strength';
+import { InputGroup, FormControl } from 'react-bootstrap'
 
 // This component handles our register form
 const Register = (props) => {
@@ -10,18 +11,20 @@ const Register = (props) => {
     <div className="container">
     <div><img src={logo} alt="logo" className="logo" /></div>
     <div className="auth-container">
-      <h2>Register</h2>
+        <h2>Welcome to OHN</h2>
+        <Link to="/">Already a member? Sign in here.</Link>
       <hr />
       <form onSubmit={props.handleRegister} >
         <p>Username:</p>
-        <input name="username" type="text" value={props.formData.username} onChange={props.handleChange} />
-        <p>Email:</p>
-        <input name="email" type="text" value={props.formData.email} onChange={props.handleChange} />
-        <p>Password:</p>
-        <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} />
+        <input name="username" type="text" value={props.formData.username} onChange={props.handleChange} required/>
+          <p>Email:</p>
+          
+        <input name="email" type="text" value={props.formData.email} onChange={props.handleChange} required/>
+          <p>Password:</p>
+        <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} required/>
         <hr/>
-        <input type="submit" value="Register"></input>
-        <Link to="/">Login</Link>
+        <button className="btn-outline-dark">Register</button>
+        
       </form>
     </div>
     </div>

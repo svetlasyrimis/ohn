@@ -5,7 +5,7 @@ const ProjectListSearch = props => {
   
   return (
 
-    <div className="flex-column project-list">
+    <div className="flex-column project-list results">
       {props.projects && props.projects.map(project =>
 
         (<div key={project.id} className="project-list">

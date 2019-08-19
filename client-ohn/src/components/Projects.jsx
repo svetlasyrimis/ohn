@@ -15,7 +15,8 @@ class Projects extends React.Component {
       },
       shouldShowAlert:false,
       isFlipped: false,
-      projectToBeDeleted:''
+      projectToBeDeleted: '',
+      deleteMessage: "Are you sure you want to delete this project? This cannot be undone."
     }
   }
 
@@ -71,7 +72,7 @@ class Projects extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="project-board">
         {this.state.shouldShowAlert && <SweetAlert
           warning
           showCloseButton={true}
@@ -81,10 +82,10 @@ class Projects extends React.Component {
           cancelBtnText="Cancel"
           confirmBtnBsStyle="danger"
           cancelBtnBsStyle="info"
-          title="Are you sure?"
+          title="Delete project"
           onCancel={(e) => { this.showAlert(false) }}
           onConfirm={this.alertOnConfirm}
-        >
+        >{this.state.deleteMessage}
         </SweetAlert>}
         <ModalProject currentUser={this.props.currentUser} handleSubmit={this.props.handleSubmit} />
         
