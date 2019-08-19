@@ -32,19 +32,20 @@ project16 = Project.create! name: 'Universal Wireless Phone Change', description
 
 
 collaborator1 = Collaborator.create! user_id: user1.id, project_id: project1.id, isOwner: true 
-collaborator2 = Collaborator.create! user_id: user2.id, project_id: project2.id, isOwner: true 
-collaborator3 = Collaborator.create! user_id: user3.id, project_id: project3.id, isOwner: true 
-collaborator4 = Collaborator.create! user_id: user4.id, project_id: project4.id, isOwner: true 
-collaborator5 = Collaborator.create! user_id: user5.id, project_id: project5.id, isOwner: true 
-collaborator6 = Collaborator.create! user_id: user6.id, project_id: project6.id, isOwner: true 
-collaborator7 = Collaborator.create! user_id: user7.id, project_id: project7.id, isOwner: true 
-collaborator8 = Collaborator.create! user_id: user5.id, project_id: project8.id, isOwner: true 
-collaborator9 = Collaborator.create! user_id: user1.id, project_id: project9.id, isOwner: true 
-collaborator9 = Collaborator.create! user_id: user2.id, project_id: project9.id, isOwner: false 
-collaborator9 = Collaborator.create! user_id: user3.id, project_id: project9.id, isOwner: false 
-collaborator9 = Collaborator.create! user_id: user4.id, project_id: project9.id, isOwner: false 
-collaborator9 = Collaborator.create! user_id: user5.id, project_id: project9.id, isOwner: false 
-collaborator9 = Collaborator.create! user_id: user6.id, project_id: project9.id, isOwner: false 
+collaborator2 = Collaborator.create! user_id: user1.id, project_id: project2.id, isOwner: true 
+collaborator3 = Collaborator.create! user_id: user1.id, project_id: project3.id, isOwner: true 
+collaborator4 = Collaborator.create! user_id: user2.id, project_id: project4.id, isOwner: true 
+collaborator5 = Collaborator.create! user_id: user2.id, project_id: project5.id, isOwner: true 
+collaborator6 = Collaborator.create! user_id: user2.id, project_id: project6.id, isOwner: true 
+collaborator7 = Collaborator.create! user_id: user3.id, project_id: project7.id, isOwner: true 
+collaborator8 = Collaborator.create! user_id: user3.id, project_id: project8.id, isOwner: true 
+collaborator9 = Collaborator.create! user_id: user3.id, project_id: project9.id, isOwner: true 
+collaborator10 = Collaborator.create! user_id: user4.id, project_id: project10.id, isOwner: true 
+collaborator11 = Collaborator.create! user_id: user4.id, project_id: project11.id, isOwner: true 
+collaborator12 = Collaborator.create! user_id: user4.id, project_id: project12.id, isOwner: true 
+collaborator13 = Collaborator.create! user_id: user5.id, project_id: project13.id, isOwner: true 
+collaborator14 = Collaborator.create! user_id: user5.id, project_id: project14.id, isOwner: true
+collaborator5 = Collaborator.create! user_id: user5.id, project_id: project15.id, isOwner: true  
 
 
 
