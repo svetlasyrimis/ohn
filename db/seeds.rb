@@ -30,12 +30,6 @@ project15 = Project.create! name: 'Doormat with detachable hexagon tiles', descr
 project16 = Project.create! name: 'Universal Wireless Phone Change', description: ' Phone Charger Android, Iphone, LG,etc. '
 
 
-# user1.projects.push(project1,project2,project3)
-# user2.projects.push(project4,project5,project6)
-# user3.projects.push(project7,project8,project9,project16)
-# user4.projects.push(project10,project11,project12)
-# user5.projects.push(project13,project14,project15)
-
 
 collaborator1 = Collaborator.create! user_id: user1.id, project_id: project1.id, isOwner: true 
 collaborator2 = Collaborator.create! user_id: user2.id, project_id: project2.id, isOwner: true 
@@ -53,16 +47,12 @@ collaborator9 = Collaborator.create! user_id: user5.id, project_id: project9.id,
 collaborator9 = Collaborator.create! user_id: user6.id, project_id: project9.id, isOwner: false 
 
 
-# task = Task.create! name: 'Casting', project_id: project.id
-# task = Task.create! name: 'Molding', project_id: project.id
+
 skill = Skill.create! name: 'dancing', user_id:user1.id
 skill = Skill.create! name: 'coding', user_id:user1.id
 interest = Interest.create! name: 'Crossfit', user_id:user1.id
 interest = Interest.create! name: '3D design', user_id:user1.id
 
-
-# task = Task.create! name: '', project_id: project.id
-# task = Task.create! name: 'Design', project_id: project.id
 
 skill = Skill.create! name: 'Video Software SDK', user_id:user2.id
 skill = Skill.create! name: 'Project Management', user_id:user2.id
