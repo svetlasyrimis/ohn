@@ -12,3 +12,9 @@ export const becomeCollaborator = async (projectId) => {
   console.log(resp)
   return resp.data
 };
+
+export const removeCollaborator = async (projectId) => {
+  const resp = await api.delete(`/collaborators/${projectId}`);
+  console.log(resp)
+  return resp.data
+}

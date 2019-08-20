@@ -1,42 +1,82 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-//have to pass it inside in the map of project list
+
+
+
 const ProjectCardFront = (props) => {
-
   let creator = props.project.collaborators.filter(collaborator => collaborator.isOwner)[0].user.username
-  
+
   console.log(creator)
   let isCollaborator = props.project.collaborators.filter(collaborator => collaborator.user.username === props.currentUser.username).length > 0
 
-  // console.log("isCollaborator=", isCollaborator)
-
   let isOwner = props.currentUser.username === creator
-  // console.log("isOwner=", isOwner)
-
   let isOwnerOrCollaborator = isOwner || isCollaborator
 
-  // console.log("isOwnerOrCollaborator=", isOwnerOrCollaborator)
-
   return (
-    
+
     <div className="project-card">
-      
+
       <p>Project name : {props.project.name}</p>
       <p>Description: {props.project.description}</p>
       <p>Creator: {creator} </p>
-    
 
-      <button onClick={props.handleClick}>OHNers</button>
-      <br />
-      {isOwner && <button name={props.project.id} onClick={(e) => {
-        props.showAlertBeforeDelete();
-        props.updateProjectToBeDeleted(props.project.id);
-      }}>Delete project</button>}
-      {(!isOwnerOrCollaborator && !props.isAdded) && <button className="btn-outline-dark" name={props.project.id} onClick={(e) => { e.preventDefault(); props.handleAdd(e); props.becomeCollaborator(e) }}>Join Project</button>}
-      {props.isAdded && <p className="bold" name={props.project.id}>Added</p>}
-      <Link to={`/projects/${parseInt(props.project.id)}`}>See More</Link>
+      <FontAwesomeIcon
+        onClick={props.handleClick}
+        className="icon"
+        icon="users"
+        size="lg"
+        style={{ color: "#55989A" }} />
+      {/* <button onClick={props.handleClick}>Ohners</button> */}
       
+
+      {isOwner && <>
+        {/* <button
+          name={props.project.id}
+          onClick={(e) => {
+            props.showAlertBeforeDelete();
+            props.updateProjectToBeDeleted(props.project.id);
+          }}>Delete project</button> */}
+        <FontAwesomeIcon
+          icon="trash-alt"
+          className="trash"
+          size="lg"
+          style={{ color: "red" }} onClick={(e) => {
+            props.showAlertBeforeDelete();
+            props.updateProjectToBeDeleted(props.project.id);
+          }} />
+        
+        <Link to={`/projects/${parseInt(props.project.id)}`}><FontAwesomeIcon
+        style={{ color: "black" }}
+        className="icon"
+        icon="info-circle"
+        size="lg"
+        /></Link>
+      </>}
+
+      {(!isOwnerOrCollaborator && !props.isAdded) &&
+        <button
+          className="btn-outline-dark"
+          name={props.project.id}
+          onClick={(e) => {
+            e.preventDefault();
+            props.handleAdd(e);
+            props.becomeCollaborator(e)
+          }}>Join Project</button>}
+
+      {props.isAdded && <p className="green">Joined <span>&#10004;</span> </p>}
+
+      {!isOwner && isCollaborator && <><Link to={`/projects/${parseInt(props.project.id)}`}>See More</Link><button
+        className="btn-outline-dark"
+        name={props.project.id}
+        onClick={(e) => {
+          e.preventDefault();
+          props.removeCollaborator(props.project.id)
+        }}>Leave Project</button></>}
+
+     
+
     </div>
   )
 }

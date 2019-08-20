@@ -3,15 +3,13 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
-import {  Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Projects from './components/Projects'
 import ProjectDetails from './components/ProjectDetails'
 import Search from './components/Search'
 import SweetAlert from 'react-bootstrap-sweetalert'
-
-// import 'react-router-modal/css/react-router-modal.css'
 
 
 import {
@@ -21,31 +19,27 @@ import {
 } from './services/api-helper'
 import {
   createSkill,
-  // getSkills,
   destroySkill
 } from './services/skill'
 
 import {
-  // getProjects,
   deleteProject,
   createProject
 } from './services/project'
 import './App.css';
 import {
-  // getInterests,
   destroyInterest,
   createInterest
 } from './services/interest';
-// import SkillList from './components/SkillList';
 import ProfilePage from './components/ProfilePage';
-import { becomeCollaborator } from './services/search';
+import { becomeCollaborator, removeCollaborator } from './services/search';
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck, faUsers,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit)
+library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck,faUsers,faInfoCircle)
 
 
 class App extends React.Component {
@@ -80,9 +74,6 @@ class App extends React.Component {
         interests: user.interests,
         collabFor: user.collabFor,
       })
-      // console.log(this.state.collabFor)
-      // const skills = await getSkills(this.state.currentUser.id)
-      // const interests = await getInterests(this.state.currentUser.id)
     } else {
       this.props.history.push("/")
     }
@@ -192,7 +183,7 @@ class App extends React.Component {
     }))
   }
   handleDeleteInterest = async (interestId) => {
-    
+
     await destroyInterest(this.state.currentUser.id, interestId);
     this.setState(prevState => ({
       interests: prevState.interests.filter(interest =>
@@ -253,7 +244,23 @@ class App extends React.Component {
 
       },
       collabFor: [...prevState.currentUser.collabFor.reverse(),
-        resp]
+        resp],
+      // projects: {
+      //   ...prevState.projects,
+      //   collaborators: [prevState.]
+      // }
+    }))
+  }
+
+  removeUserAsCollaborator = async (projectId) => {
+    // debugger
+    const resp = await removeCollaborator(projectId)
+
+
+    this.setState(prevState => ({
+      collabFor: prevState.collabFor.filter(project =>
+        project.id !== parseInt(projectId)
+      )
     }))
   }
 
@@ -306,7 +313,7 @@ class App extends React.Component {
           onConfirm={(e) => { this.hideAlert(e) }}>{this.state.errorRegister}</SweetAlert>)}
 
 
-        {this.state.initAlert && (this.state.skills.length === 0 ||this.state.interests.length === 0) &&
+        {this.state.initAlert && (this.state.skills.length === 0 || this.state.interests.length === 0) &&
 
           (<SweetAlert
             success
@@ -355,6 +362,7 @@ class App extends React.Component {
                 // handleDelete={this.handleDeleteProject}
                 collabFor={this.state.collabFor}
                 deleteThisProject={this.deleteThisProject}
+                removeCollaborator={this.removeUserAsCollaborator}
               >
               </Projects>
             )} />

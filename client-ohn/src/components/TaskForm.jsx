@@ -25,7 +25,6 @@ export default class TaskForm extends React.Component {
   handleTaskSubmit = async (ev) => {
     ev.preventDefault();
     const resp = await this.handleCreateTask(this.props.projectId, this.state.name)
-    // debugger;
     console.log(resp)
     this.setState({
       name: ''

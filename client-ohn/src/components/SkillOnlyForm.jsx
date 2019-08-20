@@ -4,7 +4,6 @@ import React from 'react'
 export default class SkillOnlyForm extends React.Component {
 
   constructor(props) {
-    // debugger
     super(props);
     this.state = {
       name: '',

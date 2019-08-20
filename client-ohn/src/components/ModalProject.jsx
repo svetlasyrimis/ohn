@@ -10,10 +10,11 @@ export default function ModalProject(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <div>
+      <Button variant="outline-dark modal-button"  onClick={handleShow}>
         Add new project
       </Button>
-
+      </div>
       <Modal show={show} onHide={handleClose}> 
         <Modal.Header closeButton>
           <Modal.Title>New Project</Modal.Title>

@@ -3,15 +3,17 @@ import ReactCardFlip from 'react-card-flip';
 import ProjectCardFront from './ProjectCardFront';
 import ProjectCardBack from './ProjectCardBack'
 
-//This component contains the modal with the project form, project List that renders all the projects and Link to close it
+//This component contains the flipping card(front and back),statefult component in order to tagret the flipping state of the card and track if a project has been added or removed.
+
+
 class ProjectFlippingCard extends React.Component {
-  
+
   constructor(props) {
-    
     super(props)
     this.state = {
       isFlipped: false,
-      isAdded:false,
+      isAdded: false,
+      isRemoved: false,
       project: this.props.project,
       collabFor: this.props.collabFor,
       collaborators: this.props.collaborators,
@@ -25,24 +27,44 @@ class ProjectFlippingCard extends React.Component {
     }));
   }
   handleAdd = () => {
-    // ev.preventDefault();
     this.setState(prevState => ({
-      isAdded: !prevState.isAdded
+      isAdded: !prevState.isAdded,
+      
     }));
   }
 
-  // handleAddCollaboratorSubmit = (ev) => {
-  //   ev.preventDefault();
-  //   this.handleAdd();
-  //   this.props.becomeCollaborator()
-  // }
+  handleRemove = () => {
+    this.setState(prevState => ({
+      isRemoved: !prevState.isRemoved
+    }));
+  }
+
+
   render() {
     return (
-      <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
+      <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal" infinite={true} flipSpeedFrontToBack={0.8} containerStyle={{width: "fit-content"}}>
+        <ProjectCardFront
+          handleClick={this.handleClick}
+          showAlertBeforeDelete={this.props.showAlertBeforeDelete}
+          project={this.state.project}
+          currentUser={this.props.currentUser}
+          becomeCollaborator={this.props.becomeCollaborator}
+          handleAdd={this.handleAdd}
+          isAdded={this.state.isAdded}
+          updateProjectToBeDeleted={this.props.updateProjectToBeDeleted}
+          removeCollaborator={this.props.removeCollaborator}
+          handleRemove={this.handleRemove}
+          key="front"></ProjectCardFront>
 
-        <ProjectCardFront handleClick={this.handleClick} showAlertBeforeDelete={this.props.showAlertBeforeDelete} project={this.state.project} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator} handleAdd={this.handleAdd} isAdded={this.state.isAdded} updateProjectToBeDeleted={this.props.updateProjectToBeDeleted}key="front"></ProjectCardFront>
-         
-        <ProjectCardBack key="back" date={this.props.date} handleClick={this.handleClick} project={this.state.project} handleAdd={this.handleAdd} currentUser={this.props.currentUser} becomeCollaborator={this.props.becomeCollaborator}></ProjectCardBack>
+        <ProjectCardBack
+          key="back"
+          date={this.props.date}
+          handleClick={this.handleClick}
+          project={this.state.project}
+          handleAdd={this.handleAdd}
+          currentUser={this.props.currentUser}
+          becomeCollaborator={this.props.becomeCollaborator}>
+          </ProjectCardBack>
 
       </ReactCardFlip>
     )

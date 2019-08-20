@@ -1,5 +1,7 @@
+# require('byebug')
+
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show update destroy add_collaborator]
+  before_action :set_project, only: %i[show update destroy add_collaborator remove_collaborator]
   before_action :authorize_request 
   # before_action :authorize_request, except: %i[index show]
 
@@ -54,6 +56,14 @@ class ProjectsController < ApplicationController
     end 
   end
 
+  def remove_collaborator 
+    # debugger
+    collaborator =  @project.collaborators.find do |collaborator|
+      collaborator.isOwner == false && collaborator.user_id == @current_user.id 
+    end 
+    collaborator.destroy
+    render json: "Not anymore a collaborator"
+  end 
   
   def update
     if @project.update(project_params)

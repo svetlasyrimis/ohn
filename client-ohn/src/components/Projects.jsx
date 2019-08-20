@@ -7,7 +7,8 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 class Projects extends React.Component {
   
   constructor(props) {
-    super(props) 
+    super(props)
+    console.log(props)
     this.state = {
       projectData: {
         name: '',
@@ -96,8 +97,10 @@ class Projects extends React.Component {
           handleClick={this.handleClick}
           isFlipped={this.state.isFlipped}
           collabFor={this.props.collabFor}
-          updateProjectToBeDeleted={this.updateProjectToBeDeleted}/>
-        
+          updateProjectToBeDeleted={this.updateProjectToBeDeleted}
+          removeCollaborator={this.props.removeCollaborator}
+          />
+          
         <Link to='/dashboard'>Back</Link>
       </div>
     )

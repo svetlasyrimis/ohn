@@ -193,6 +193,27 @@ br {
   margin: 6px;
 }
 
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+   
+    opacity: 1;
+  }
+  40% {
+    
+    opacity: 1;
+  }
+  100% {
+    
+    opacity: 1;
+  }
+}
+
 @keyframes text {
   
   25% {
@@ -224,7 +245,11 @@ br {
     opacity: 0;
   }
 }
+.green {
+  color: #00FF7F;
+  font-weight: bold;
 
+}
 /* @keyframes bottomFadeOut {
   0% {
     position: absolute;
@@ -286,7 +311,10 @@ input {
   padding: 20px;
   margin-top:70px;
 }
-
+.project-board {
+  
+  
+}
 .project-details-container {
   
   
@@ -326,12 +354,22 @@ input {
   border-radius: .3rem
 }
 
-.font-awesome-trash {
+.font-awesome-trash, .icon, .trash {
   cursor: pointer;
 }
-
+.svg-inline--fa.fa-lg {  
+  font-size: 2.5em;
+  padding: 5px;
+}
+.fa-trash-alt {
+  margin-left: 5px
+}
 .normal {
   font-size: 22px;
+}
+
+.modal-button {
+  margin:20px;
 }
 /* nav.sidebar {
   -webkit-transition: margin 200ms ease-out;
