@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import { BrowserRouter as Router } from 'react-router-dom'
-
+// import 'fontawesome';
 
 ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
 

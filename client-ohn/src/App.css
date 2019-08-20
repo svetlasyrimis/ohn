@@ -116,16 +116,17 @@ body {
 }
 .flex-column {
   display: flex;
+
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .skills-interests-items {
   padding: 20px;
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: space-between;
-  width: -webkit-fill-available
+  /* width: 300px; */
 }
 .flex-row {
   display: flex;
@@ -160,11 +161,12 @@ br {
 .bold {
   font-weight: bold;
   font-size: 26px;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
 }
 
 .user-info {
-  
-  min-height: 300px;
+  padding: 20px;
 }
 .greeting {
   font-size: 24px;
@@ -186,6 +188,10 @@ br {
   background-color:red;
   border-radius: 20%;
 } */
+
+.list-item {
+  margin: 6px;
+}
 
 @keyframes text {
   
@@ -318,6 +324,14 @@ input {
   font-size: 1.1rem;
   line-height: 1.5;
   border-radius: .3rem
+}
+
+.font-awesome-trash {
+  cursor: pointer;
+}
+
+.normal {
+  font-size: 22px;
 }
 /* nav.sidebar {
   -webkit-transition: margin 200ms ease-out;

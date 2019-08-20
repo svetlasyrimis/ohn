@@ -41,6 +41,12 @@ import ProfilePage from './components/ProfilePage';
 import { becomeCollaborator } from './services/search';
 
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit)
+
 
 class App extends React.Component {
   constructor(props) {
@@ -165,10 +171,10 @@ class App extends React.Component {
       skills: [skill, ...prevState.skills]
     }))
   }
-  handleDeleteSkill = async (ev) => {
+  handleDeleteSkill = async (skillId) => {
 
-    const skillId = ev.target.name
-    console.log(ev.target.name)
+    // const skillId = ev.target.name
+    // console.log(ev.target.name)
     await destroySkill(this.state.currentUser.id, skillId);
     this.setState(prevState => ({
       skills: prevState.skills.filter(skill =>
@@ -185,9 +191,8 @@ class App extends React.Component {
       interests: [interest, ...prevState.interests]
     }))
   }
-  handleDeleteInterest = async (ev) => {
-    const interestId = ev.target.name
-    console.log(ev.target.name)
+  handleDeleteInterest = async (interestId) => {
+    
     await destroyInterest(this.state.currentUser.id, interestId);
     this.setState(prevState => ({
       interests: prevState.interests.filter(interest =>

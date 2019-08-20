@@ -13,15 +13,15 @@ import InterestList from './InterestList'
 export default function ProfilePage(props) {
   return (
     <div>
-      <div className="user-info flex-column">
+      <div className="user-info" >
         
-        <p className="bold">Username : {props.user.username}</p>
-        <p className="bold">Email : {props.user.email}</p>
+        <p className="normal">Username: <strong>{props.user.username}</strong></p>
+        <p className="normal">Email: <strong> {props.user.email}</strong></p>
         <hr />
 
 
       </div>
-      <div className="skills-and-interests">
+      
         <div className="flex-column user-stuff">
           <p className="bold">Skills</p>
           <hr/>
@@ -29,7 +29,7 @@ export default function ProfilePage(props) {
           <SkillList skills={props.skills} handleDelete={props.handleDelete} />
         </div>
 
-        {/* <hr className="vertical-hr"/> */}
+        <hr/>
 
 
         <div className="flex-column user-stuff">
@@ -38,7 +38,7 @@ export default function ProfilePage(props) {
           <ModalInterest currentUser={props.user} handleSubmit={props.handleSubmitInt} />
           <InterestList interests={props.interests} handleDelete={props.handleDeleteInt} />
         </div>
-      </div>
+      
     </div>
   )
 }

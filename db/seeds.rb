@@ -29,7 +29,21 @@ user7 = User.create! username: 'george', email: 'george@gmail.com', password: "g
 # project15 = Project.create! name: 'Doormat with detachable hexagon tiles', description: 'A Customizable Doormat displaying different message'
 # project16 = Project.create! name: 'Universal Wireless Phone Change', description: ' Phone Charger Android, Iphone, LG,etc.'
 
-
+# collaborator1 = Collaborator.create! user_id: 1, project_id: 1
+# collaborator2 = Collaborator.create! user_id: 1, project_id: 2
+# collaborator3 = Collaborator.create! user_id: 1, project_id: 3
+# collaborator4 = Collaborator.create! user_id: 2, project_id: 4
+# collaborator5 = Collaborator.create! user_id: 2, project_id: 5
+# collaborator6 = Collaborator.create! user_id: 2, project_id: 6
+# collaborator7 = Collaborator.create! user_id: 3, project_id: 7
+# collaborator8 = Collaborator.create! user_id: 3, project_id: 8
+# collaborator9 = Collaborator.create! user_id: 3, project_id: 9
+# collaborator10 = Collaborator.create! user_id: 4, project_id: 10
+# collaborator11 = Collaborator.create! user_id: 4, project_id: 11
+# collaborator12 = Collaborator.create! user_id: 4, project_id: 12
+# collaborator13 = Collaborator.create! user_id: 5, project_id: 13
+# collaborator14 = Collaborator.create! user_id: 5, project_id: 14
+# collaborator15 = Collaborator.create! user_id: 5, project_id: 15
 
 skill = Skill.create! name: 'dancing', user_id:user1.id
 skill = Skill.create! name: 'coding', user_id:user1.id
