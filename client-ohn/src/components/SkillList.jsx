@@ -1,5 +1,4 @@
 import React from 'react';
-import bulletSkill from '../assets/bullet-skill.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -9,10 +8,10 @@ function SkillList(props) {
     <>
       {props.skills && props.skills.map(skill =>
         <div className="skills-interests-items" key={skill.id}>
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             icon="edit"
             style={{ color: "#55989A" }}
-            size="lg" />
+            size="lg" /> */}
           
           <FontAwesomeIcon
             className="list-item"
@@ -27,6 +26,8 @@ function SkillList(props) {
               e.preventDefault();
               props.handleDelete(skill.id)
             }}
+            className="list-item spin"
+            
             icon="trash-alt"
             size="lg"
             style={{ color: "red" }} />

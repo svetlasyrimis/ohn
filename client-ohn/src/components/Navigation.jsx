@@ -2,8 +2,7 @@ import React from 'react'
 import logo from '../assets/logo.png'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { Dropdown, DropdownButton, DropdownItem } from 'react-bootstrap';
-// import LinkContainer from 'react-router-bootstrap'
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 
 const Navigation = props => {
@@ -13,7 +12,7 @@ const Navigation = props => {
     <div className="nav-bar">
 
       <Link to='/dashboard'><img src={logo} alt="logo" className="logo" /></Link>
-      {/* <Link to='/profile'><Button variant="outline-info">Your Profile</Button></Link> */}
+      
       
       <DropdownButton size="lg" id="dropdown-button" alignRight  title={props.currentUser.username}>
         <Dropdown.Item href="/profile" as={Link} to='/profile' >Your Profile</Dropdown.Item>
@@ -21,7 +20,7 @@ const Navigation = props => {
         <Dropdown.Item href="/search" as={Link} to='/search'>Join a Project</Dropdown.Item>
         <Dropdown.Item className="logout" as={Button} onClick={props.handleLogout}>Logout</Dropdown.Item>
       </DropdownButton>
-      {/* <Button variant="outline-dark" onClick={props.handleLogout}>Logout</Button> */}
+      
 
 
 
@@ -34,8 +33,3 @@ const Navigation = props => {
 
 export default Navigation
 
-{/* <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-</DropdownButton> */}

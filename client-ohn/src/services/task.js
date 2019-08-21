@@ -19,6 +19,6 @@ export const destroyTask = async (projectId, id) => {
 
 export const updateTask = async(projectId, id, data) => {
   const resp = await api.put(`/projects/${projectId}/tasks/${id}`, data);
-  debugger;
+  // debugger;
   return resp.data;
 }

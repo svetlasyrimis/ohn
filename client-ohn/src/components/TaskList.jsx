@@ -14,4 +14,4 @@ export default function TaskList(props) {
   )
 }
 
-// onClick={() => props.edit(task.id)}
+

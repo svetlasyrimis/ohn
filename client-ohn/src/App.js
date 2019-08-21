@@ -10,6 +10,7 @@ import Projects from './components/Projects'
 import ProjectDetails from './components/ProjectDetails'
 import Search from './components/Search'
 import SweetAlert from 'react-bootstrap-sweetalert'
+import Footer from './components/Footer'
 
 
 import {
@@ -37,9 +38,9 @@ import { becomeCollaborator, removeCollaborator } from './services/search';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck, faUsers,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck, faUsers,faInfoCircle,faArrowCircleLeft,faRunning,faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck,faUsers,faInfoCircle)
+library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck,faUsers,faInfoCircle, faArrowCircleLeft,faRunning,faFolderPlus)
 
 
 class App extends React.Component {
@@ -212,23 +213,6 @@ class App extends React.Component {
   }
 
 
-  // handleDeleteProject = async (ev) => {
-  //   console.log("handleDeleteProject");
-  //   this.hideAlert(true);
-  // }
-
-  // handleReallyDeleteProject = async (ev) => {
-  //   console.log("Deleted")
-  //   const id = ev.target.name
-  //   await deleteProject(id)
-
-  //   this.setState(prevState => ({
-  //     projects: prevState.projects.filter(project =>
-  //       project.id !== parseInt(id)
-  //     )
-  //   }))
-  //   this.hideAlert(false);
-  // }
 
   addUserAsCollaborator = async (ev) => {
     ev.preventDefault();
@@ -245,17 +229,13 @@ class App extends React.Component {
       },
       collabFor: [...prevState.currentUser.collabFor.reverse(),
         resp],
-      // projects: {
-      //   ...prevState.projects,
-      //   collaborators: [prevState.]
-      // }
+     
     }))
   }
 
   removeUserAsCollaborator = async (projectId) => {
     // debugger
-    const resp = await removeCollaborator(projectId)
-
+    await removeCollaborator(projectId)
 
     this.setState(prevState => ({
       collabFor: prevState.collabFor.filter(project =>
@@ -394,6 +374,7 @@ class App extends React.Component {
             />
           </>
         }
+        <Footer />
       </div>
     );
   }

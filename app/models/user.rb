@@ -6,9 +6,9 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }
   
-  has_many :interests
-  has_many :skills
-  has_many :collaborators
+  has_many :interests, dependent: :destroy
+  has_many :skills, dependent: :destroy
+  has_many :collaborators, dependent: :destroy
   has_many :projects, through: :collaborators
 
 end

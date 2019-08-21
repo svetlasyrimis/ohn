@@ -2,7 +2,7 @@ import { api } from './api-helper';
 
 export const createInterest = async (userId, data) => {
   const resp = await api.post(`/users/${userId}/interests`, { ...data, user_id: userId });
-  debugger
+  // debugger
   console.log(resp.data)
   return resp.data;
 };

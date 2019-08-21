@@ -1,8 +1,11 @@
 import React from 'react'
 import ProjectList from './ProjectList';
-import { Link } from 'react-router-dom';
-import ModalProject from './ModalProject'
-import SweetAlert from 'react-bootstrap-sweetalert'
+import ModalProject from './ModalProject';
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+
+
+
 //This component contains the modal with the project form, project List that renders all the projects and Link to close it
 class Projects extends React.Component {
   
@@ -88,6 +91,7 @@ class Projects extends React.Component {
           onConfirm={this.alertOnConfirm}
         >{this.state.deleteMessage}
         </SweetAlert>}
+
         <ModalProject currentUser={this.props.currentUser} handleSubmit={this.props.handleSubmit} />
         
          <ProjectList 
@@ -101,7 +105,6 @@ class Projects extends React.Component {
           removeCollaborator={this.props.removeCollaborator}
           />
           
-        <Link to='/dashboard'>Back</Link>
       </div>
     )
   }

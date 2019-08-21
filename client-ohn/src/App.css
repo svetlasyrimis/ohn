@@ -23,13 +23,13 @@ a:-webkit-any-link{
   background-color: black;
 }
 #dropdown-button:active  {
-  background-color: #848EA2;
+  background-color: black;
 }
 .dropdown-item:active .logout:active {
-  background-color: #848EA2;
+  background-color: #cecece;
 }
 .dropdown-item:active {
-  background-color: #848EA2;
+  background-color: #cecece;
 }
 .dashboard-buttons{
   height: 400px;
@@ -41,19 +41,11 @@ a:-webkit-any-link{
 .call-for-action {
   font-weight: 400;
   letter-spacing: 1px;
-  background-color: #f8f9fa;
+  background-color: #fdfeff;
 }
-/* .dropdown-toggle {
-  background-color: black;
-} */
-/* .dropdown-toggle,.btn-primary, .btn-lg{
-  background-color: #848EA2;
-} */
-.dashboard-buttons, .project-board {
-  
-  
 
-}
+/* .dashboard-buttons, .project-board {
+} */
 
 .nav-bar {
   top:0;
@@ -66,32 +58,19 @@ a:-webkit-any-link{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
 }
 
 .logo {
   width: 70px;
   height: 70px;
   object-fit: cover;
-  
-  
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
   font-family: 'ABeeZee', sans-serif;
-  /* background:
-    radial-gradient(rgba(0, 0, 0, 0.2) 3px, transparent 4px),
-    radial-gradient(rgba(0, 0, 0, 0.1) 3px, transparent 4px),
-    linear-gradient(#fff 4px, transparent 0),
-    linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
-    linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
-    #fff;
-    background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
-    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px; */
     background: url('http://library.skc.edu/wp-content/uploads/2015/06/Dollarphotoclub_70724536-1.jpg') no-repeat center center fixed; 
-    /* filter: grayscale(100%); */
     
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -110,10 +89,7 @@ body {
   padding-bottom:20px;
   width: 400px;
 }
-.auth-container {
-  
-  /* width: fit-content; */
-}
+
 .flex-column {
   display: flex;
 
@@ -124,10 +100,11 @@ body {
 .skills-interests-items {
   padding: 20px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  /* width: 300px; */
 }
+
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -140,10 +117,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* .input-description {
-  width: 250px;
-  height: 150px;
-} */
+
 br {
   border-bottom:1px dashed black;
   display:block;
@@ -176,21 +150,11 @@ br {
   animation: text 4s linear 0.5s 1 normal forwards;
   
 }
-/* @keyframes fade {
-  0%,100% { opacity: 0 }
-  50% { opacity: 1 }
-}
-.icon {
-  margin: 3px;
-  cursor: pointer;
-}
-.garbage{
-  background-color:red;
-  border-radius: 20%;
-} */
+
 
 .list-item {
   margin: 6px;
+  cursor: pointer;
 }
 
 @keyframes checkmark {
@@ -246,30 +210,11 @@ br {
   }
 }
 .green {
-  color: #00FF7F;
+  color: #55989A;
   font-weight: bold;
+  font-size: 20px;
 
 }
-/* @keyframes bottomFadeOut {
-  0% {
-    position: absolute;
-    bottom: -5rem;
-    opacity: 0;
-  }
-
-  75% {
-    position: absolute;
-    bottom: 25%;
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-  
-} */
-
-
 
 input {
   padding: 5px;
@@ -282,13 +227,7 @@ input {
   align-self: flex-start;
 }
 
-/* .vertical-hr {  
-  
-  border-right: 2px solid hsla(200, 10%, 50%,100);
-  height:30vh;
-  margin: -10px;     
-} */
-
+/* Project */
 .project-card, .project-details-items{
   -webkit-box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 10px 30px 0px rgba(98, 83, 83, 0.75);
@@ -298,6 +237,17 @@ input {
   padding: 20px;
   height: auto;
   margin: 10px;
+}
+.project-card {
+  min-height: 300px;
+}
+
+.back-card {
+  min-height: 300px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .project-list{
   display: flex;
@@ -311,10 +261,7 @@ input {
   padding: 20px;
   margin-top:70px;
 }
-.project-board {
-  
-  
-}
+
 .project-details-container {
   
   
@@ -337,10 +284,7 @@ input {
   
 }
 
-.error {
-  /* width: 500px !important; */
-  background-color: pink !important;
-}
+
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
   background-color: #848EA2;
@@ -371,11 +315,65 @@ input {
 .modal-button {
   margin:20px;
 }
-/* nav.sidebar {
-  -webkit-transition: margin 200ms ease-out;
-  -moz-transition: margin 200ms ease-out;
-  -o-transition: margin 200ms ease-out;
-  transition: margin 200ms ease-out;
+.icon:hover {
+  font-size: 2.7em;
+  transition: all 0.3s ease-in-out ;
+  visibility: visible;
+}
+
+.icon[title="See more."] {
+  font-size: 40px;
+}
+.fa-lg[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  font-size: 16px;
+}
+
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.running {
+  font-size: 4em;
+}
+
+.join {
+  margin: 10px;
+  border:none;
+  border-radius: 10%;
+  padding: 5px;
+}
+
+/* .fa-spin {
+  -webkit-animation: fa-spin 0.75s infinite linear !important;
+  animation: fa-spin 0.75s infinite linear !important;
 } */
 
+.list-item, .spin:hover {
+  transform: rotate3d(180)
+}
+
+.footer {
+  width:100%;
+  min-height: 140px;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .search-container {
+    margin-top: 10px;
+  }
+
+
+  }
 /* textarea on mobile width:webkit-fill-available; background-color: color */

@@ -2,7 +2,7 @@ import React from 'react'
 import { searchForProjects } from '../services/search';
 import ProjectListSearch from './ProjectListSearch'
 import SweetAlert from 'react-bootstrap-sweetalert/lib/dist/SweetAlert';
-import Button from 'react-bootstrap/Button'
+
 
 
 export default class Search extends React.Component {
@@ -56,7 +56,7 @@ export default class Search extends React.Component {
   render() {
     return (
       <div className="search-container">
-        <form onSubmit={this.handleSearchSubmit} className="flex-row-center">
+        <form onSubmit={this.handleSearchSubmit} >
           <input type="text" name="keyword" className="search-form-item" value={this.state.keyword} onChange={this.handleChange} placeholder="Enter a keyword" size="30" required/>
           <button className="call-for-action search-form-item btn-outline-info">Search for a project</button>
         </form>

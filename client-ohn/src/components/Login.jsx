@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import { Button } from 'react-bootstrap';
 
-// This component handles our register form
+// Login
 const Login = (props) => {
 
 

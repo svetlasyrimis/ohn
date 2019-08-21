@@ -6,36 +6,40 @@ import { Button } from 'react-bootstrap'
 
 const ProjectList = props => {
 
-
-  if (props.projects.length === 0 && props.collabFor.length === 0) {
-    return <p>Your list is empty</p>
-  }
-
+  console.log("project list", props.collabFor)
 
   return (
     <>
-      
-      <p>Your Projects</p>
-      <hr />
-      <div className="project-list">
-        {props.projects && props.projects.map(project => (
-          <div key={project.id} className="project-list">
-            <ProjectFlippingCard
-              date={project.created_at}
-              project={project}
-              showAlertBeforeDelete={props.showAlertBeforeDelete} updateProjectToBeDeleted={props.updateProjectToBeDeleted} currentUser={props.currentUser}
-            ></ProjectFlippingCard>
-          </div>
-        ))}
-      </div>
-      <br />
 
-
-      {props.collabFor.length ?
+      {props.projects.length > 0 ?
         <>
-          
+          <p>Your Projects</p>
+
+          <div className="project-list">
+            {props.projects && props.projects.map(project => (
+              <div key={project.id} className="project-list">
+                <ProjectFlippingCard
+                  date={project.created_at}
+                  project={project}
+                  showAlertBeforeDelete={props.showAlertBeforeDelete} updateProjectToBeDeleted={props.updateProjectToBeDeleted} currentUser={props.currentUser}
+                ></ProjectFlippingCard>
+              </div>
+            ))}
+          </div>
+        </> :
+        <>
+          <p>You have no projects. Click 'Make a Project' above</p>
+        </>
+      }
+
+<hr />
+
+
+      {props.collabFor.length > 0 ?
+        <>
+
           <p>Projects you've joined</p>
-          <hr />
+
           <div className="project-list">
             {props.collabFor.map(project => (
               <div key={project.id} >

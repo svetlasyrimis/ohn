@@ -18,20 +18,21 @@ const ProjectCardFront = (props) => {
 
     <div className="project-card">
 
-      <p>Project name : {props.project.name}</p>
-      <p>Description: {props.project.description}</p>
-      <p>Creator: {creator} </p>
+      <p><strong>Project name:</strong> {props.project.name}</p>
+      <p><strong>Description:</strong> {props.project.description}</p>
+      <p><strong>Creator:</strong> {creator} </p>
 
       <FontAwesomeIcon
         onClick={props.handleClick}
         className="icon"
+        title="collaborators"
         icon="users"
         size="lg"
         style={{ color: "#55989A" }} />
       {/* <button onClick={props.handleClick}>Ohners</button> */}
-      
 
-      {isOwner && <>
+
+      {isOwner && <div className="project-buttons">
         {/* <button
           name={props.project.id}
           onClick={(e) => {
@@ -40,42 +41,64 @@ const ProjectCardFront = (props) => {
           }}>Delete project</button> */}
         <FontAwesomeIcon
           icon="trash-alt"
-          className="trash"
+          className="trash icon"
+          title="Delete"
           size="lg"
           style={{ color: "red" }} onClick={(e) => {
             props.showAlertBeforeDelete();
             props.updateProjectToBeDeleted(props.project.id);
           }} />
-        
-        <Link to={`/projects/${parseInt(props.project.id)}`}><FontAwesomeIcon
-        style={{ color: "black" }}
-        className="icon"
-        icon="info-circle"
-        size="lg"
-        /></Link>
-      </>}
+
+        <Link to={`/projects/${parseInt(props.project.id)}`}>
+          <FontAwesomeIcon
+          style={{ color: "black" }}
+          className="icon"
+          icon="info-circle"
+          size="lg"
+          title="See more"
+          />
+        </Link>
+      </div>}
 
       {(!isOwnerOrCollaborator && !props.isAdded) &&
+        <div className="project-buttons">
         <button
-          className="btn-outline-dark"
+          className="btn-outline-dark join"
           name={props.project.id}
           onClick={(e) => {
             e.preventDefault();
             props.handleAdd(e);
             props.becomeCollaborator(e)
-          }}>Join Project</button>}
+          }}>Join a Project</button></div>
+        }
+      {props.isAdded && <p className="green"><strong>Joined <span>&#10004;</span></strong> </p>}
 
-      {props.isAdded && <p className="green">Joined <span>&#10004;</span> </p>}
+      {!isOwner && isCollaborator &&
+        <div className="project-buttons">
+          <Link to={`/projects/${parseInt(props.project.id)}`}>
+            <FontAwesomeIcon
+              style={{ color: "black" }}
+              className="icon"
+              icon="info-circle"
+              size="lg"
+              title="See more"
 
-      {!isOwner && isCollaborator && <><Link to={`/projects/${parseInt(props.project.id)}`}>See More</Link><button
-        className="btn-outline-dark"
-        name={props.project.id}
-        onClick={(e) => {
-          e.preventDefault();
-          props.removeCollaborator(props.project.id)
-        }}>Leave Project</button></>}
+            />
+          </Link>
+          
+          <FontAwesomeIcon
+            onClick={(e) => {
+              e.preventDefault();
+              props.removeCollaborator(props.project.id)
+            }}
+            className="icon running"
+            icon="running"
+            title="Leave Project"
+            size="lg"
+            style={{ color: "red" }} />
+          </div>}
 
-     
+
 
     </div>
   )

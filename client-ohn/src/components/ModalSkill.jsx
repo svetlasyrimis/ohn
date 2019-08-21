@@ -10,7 +10,7 @@ export default function ModalSkill(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-dark" onClick={handleShow}>
         Add new skill
       </Button>
 

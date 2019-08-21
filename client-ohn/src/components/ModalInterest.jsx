@@ -13,7 +13,7 @@ export default function ModalComponent(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-dark" onClick={handleShow}>
         Add new interest
       </Button>
 

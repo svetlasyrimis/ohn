@@ -22,14 +22,10 @@ export default class ProjectDetails extends React.Component {
   }
 
   async componentDidMount() {
-    // const tasks = await getTasks(this.props.id)
     this.setState({
       id: this.props.id,
-      // tasks: tasks
     })
-
     const res = await showProject(this.props.id)
-    // debugger
     console.log(res);
 
     this.setState({
@@ -54,7 +50,7 @@ export default class ProjectDetails extends React.Component {
   }
   handleTaskSubmit = async (ev) => {
     ev.preventDefault();
-    const resp = await this.handleCreateTask(this.props.id, this.state.taskName)
+    await this.handleCreateTask(this.props.id, this.state.taskName)
     // debugger;
     
     this.setState({
@@ -108,7 +104,10 @@ export default class ProjectDetails extends React.Component {
     const resp = await updateTask(this.props.id, this.state.editingId, data)
 
     this.setState(prevState => ({
-      tasks: prevState.tasks.map(task => task.id === resp.id ? resp : task)
+      tasks: prevState.tasks.map(task => task.id === resp.id ? resp : task),
+      taskName: {
+        name: ''
+      },
     }))
 
 
@@ -156,7 +155,7 @@ export default class ProjectDetails extends React.Component {
                 onChange={this.handleChange}
                 name="name"
               ></input>
-              <input type="submit" value="Add a task"></input>
+              <input  type="submit" value="Add a task"></input>
             </form>}
         
         <TaskList projectId={this.props.id} tasks={this.state.tasks} handleDelete={this.handleDeleteTask} handleUpdate={this.handleUpdate} edit={this.edit} />
