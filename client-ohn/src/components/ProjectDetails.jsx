@@ -26,7 +26,6 @@ export default class ProjectDetails extends React.Component {
       id: this.props.id,
     })
     const res = await showProject(this.props.id)
-    console.log(res);
 
     this.setState({
       name: res.name,
@@ -42,7 +41,6 @@ export default class ProjectDetails extends React.Component {
   handleCreateTask = async (projectId, data) => {
     const task = await createTask(projectId, data);
 
-    console.log(task);
     this.setState(prevState => ({
       tasks: [task, ...prevState.tasks],
 
@@ -81,10 +79,7 @@ export default class ProjectDetails extends React.Component {
 
   handleUpdate = (ev) => {
     const taskId = ev.target.name
-    console.log(taskId)
-    console.log(this.state.tasks)
     const currentTask = this.state.tasks.find(task => task.id === parseInt(taskId))
-    console.log(currentTask.name)
 
     this.setState({
       isEdit: true,
@@ -114,7 +109,6 @@ export default class ProjectDetails extends React.Component {
   }
   handleDeleteTask = async (ev) => {
     const taskId = ev.target.name
-    console.log(ev.target.name)
     await destroyTask(this.props.id, taskId);
     this.setState(prevState => ({
       tasks: prevState.tasks.filter(task =>

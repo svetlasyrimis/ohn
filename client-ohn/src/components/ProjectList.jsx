@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap'
 
 const ProjectList = props => {
 
-  console.log("project list", props.collabFor)
 
   return (
     <>

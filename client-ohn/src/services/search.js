@@ -9,12 +9,10 @@ export const searchForProjects = async (params) => {
 
 export const becomeCollaborator = async (projectId) => {
   const resp = await api.post(`/collaborator/${projectId}`);
-  console.log(resp)
   return resp.data
 };
 
 export const removeCollaborator = async (projectId) => {
   const resp = await api.delete(`/collaborators/${projectId}`);
-  console.log(resp)
   return resp.data
 }

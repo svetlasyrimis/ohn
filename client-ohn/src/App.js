@@ -126,7 +126,6 @@ class App extends React.Component {
       this.setState({
         errorRegister: er.response.data.join('.')
       })
-      // console.log(this.state.errorRegister)
     }
 
   }
@@ -158,27 +157,22 @@ class App extends React.Component {
   // skills
   handleCreateSkill = async (userId, data) => {
     const skill = await createSkill(userId, data);
-    console.log(skill);
     this.setState(prevState => ({
       skills: [skill, ...prevState.skills]
     }))
   }
   handleDeleteSkill = async (skillId) => {
-
-    // const skillId = ev.target.name
-    // console.log(ev.target.name)
     await destroySkill(this.state.currentUser.id, skillId);
     this.setState(prevState => ({
       skills: prevState.skills.filter(skill =>
         skill.id !== parseInt(skillId)
       )
     }))
-
   }
+
   //interest
   handleCreateInterest = async (userId, data) => {
     const interest = await createInterest(userId, data);
-    console.log(interest);
     this.setState(prevState => ({
       interests: [interest, ...prevState.interests]
     }))
@@ -197,13 +191,11 @@ class App extends React.Component {
   // project 
   handleCreateProject = async (data) => {
     const project = await createProject(data);
-    console.log(project);
     this.setState(prevState => ({
       projects: [project, ...prevState.projects],
     }))
   }
   deleteThisProject = async (id) => {
-    console.log("Deleted")
     await deleteProject(id)
     this.setState(prevState => ({
       projects: prevState.projects.filter(project =>
@@ -219,17 +211,7 @@ class App extends React.Component {
     const projectId = ev.target.name
     const resp = await becomeCollaborator(projectId)
     this.setState(prevState => ({
-      currentUser: {
-        ...prevState.currentUser,
-        collabFor: [
-          ...prevState.currentUser.collabFor,
-          resp
-        ],
-
-      },
-      collabFor: [...prevState.currentUser.collabFor.reverse(),
-        resp],
-     
+      collabFor: [...prevState.collabFor,resp]
     }))
   }
 
@@ -245,7 +227,6 @@ class App extends React.Component {
   }
 
   hideAlert = () => {
-    console.log('Hiding alert...');
     this.setState({
       errorLogin: "",
       initAlert: false,

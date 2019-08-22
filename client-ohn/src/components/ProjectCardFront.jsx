@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const ProjectCardFront = (props) => {
   let creator = props.project.collaborators.filter(collaborator => collaborator.isOwner)[0].user.username
 
-  console.log(creator)
   let isCollaborator = props.project.collaborators.filter(collaborator => collaborator.user.username === props.currentUser.username).length > 0
 
   let isOwner = props.currentUser.username === creator
@@ -29,16 +28,10 @@ const ProjectCardFront = (props) => {
         icon="users"
         size="lg"
         style={{ color: "#55989A" }} />
-      {/* <button onClick={props.handleClick}>Ohners</button> */}
 
 
       {isOwner && <div className="project-buttons">
-        {/* <button
-          name={props.project.id}
-          onClick={(e) => {
-            props.showAlertBeforeDelete();
-            props.updateProjectToBeDeleted(props.project.id);
-          }}>Delete project</button> */}
+        
         <FontAwesomeIcon
           icon="trash-alt"
           className="trash icon"

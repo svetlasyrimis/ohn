@@ -29,23 +29,19 @@ export default class Search extends React.Component {
 
       const results = await searchForProjects(this.state.keyword)
       // debugger;
-      console.log(results)
       this.setState({
         projects: results,
         keyword: ""
       })
     } catch (error) {
-      console.log(error)
       this.setState({
         errorMessage: "Sorry, no results found. Try again.",
         keyword:''
       })
     }
-    console.log(this.state.projects)
   }
   
   hideAlert = () => {
-    console.log('Hiding alert...');
     this.setState({
       alert: null,
       errorMessage: ""

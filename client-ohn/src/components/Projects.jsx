@@ -11,7 +11,6 @@ class Projects extends React.Component {
   
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       projectData: {
         name: '',
@@ -59,7 +58,6 @@ class Projects extends React.Component {
   }
   
   alertOnConfirm = () => { 
-    console.log("alertOnConfirm");
     if (this.state.projectToBeDeleted !== "") { 
       this.props.deleteThisProject(this.state.projectToBeDeleted);
       this.showAlert(false);
@@ -68,7 +66,6 @@ class Projects extends React.Component {
   }
 
   updateProjectToBeDeleted = (id) => { 
-    console.log("updateProjectToBeDeleted");
     this.setState({
       projectToBeDeleted: id,
     });
