@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3000'
-// const baseUrl = 'https://blooming-tundra-33956.herokuapp.com'
+// const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://blooming-tundra-33956.herokuapp.com'
 
 
 export const api = axios.create({
