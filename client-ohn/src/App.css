@@ -374,6 +374,9 @@ input {
     margin-top: 10px;
   }
 
-
+  textarea {
+    width: -webkit-fill-available;
+    
+  }
   }
 /* textarea on mobile width:webkit-fill-available; background-color: color */
