@@ -11,9 +11,11 @@ class ProjectsController < ApplicationController
   end
 
   def search
-    @projects = Project.where("name ILIKE ?", "%#{params[:search]}%") && Project.where("description ILIKE ?", "%#{params[:search]}%")
+    # byebug
+    # It will find all the projects whose name contains the search word and all the projects whose description contains it too, then perform an intersection of both results to avoids duplicates
+    @projects = Project.where("name ILIKE ?", "%#{params[:search]}%") | Project.where("description ILIKE ?", "%#{params[:search]}%")
+
     p @projects
-    # if @projects.length == 0  
     
       @filteredProjects = @projects.select do |project|
         nil == project.collaborators.find do |colab|
@@ -24,10 +26,8 @@ class ProjectsController < ApplicationController
       if @filteredProjects == []
           render json: { message: 'Sorry, no results found. Try again.' }, status: 404
       else 
-      render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
+        render json: @filteredProjects, include: [:tasks, {collaborators: {include: [:user]}}]
       end
-    
-  
   end
  
   def show
