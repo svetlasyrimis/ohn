@@ -38,9 +38,9 @@ import { becomeCollaborator, removeCollaborator } from './services/search';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck, faUsers,faInfoCircle,faArrowCircleLeft,faRunning,faFolderPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck, faUsers,faInfoCircle,faArrowCircleLeft,faRunning,faFolderPlus,faCheckCircle, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck,faUsers,faInfoCircle, faArrowCircleLeft,faRunning,faFolderPlus)
+library.add(fab, faCheckSquare, faCoffee, faTrashAlt, faCircle, faEdit, faCheck,faUsers,faInfoCircle, faArrowCircleLeft,faRunning,faFolderPlus, faCheckCircle,faTimes)
 
 
 class App extends React.Component {
@@ -216,7 +216,7 @@ class App extends React.Component {
   }
 
   removeUserAsCollaborator = async (projectId) => {
-    // debugger
+    
     await removeCollaborator(projectId)
 
     this.setState(prevState => ({

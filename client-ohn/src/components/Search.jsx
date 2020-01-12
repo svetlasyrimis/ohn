@@ -28,7 +28,6 @@ export default class Search extends React.Component {
     try {
 
       const results = await searchForProjects(this.state.keyword)
-      // debugger;
       this.setState({
         projects: results,
         keyword: ""

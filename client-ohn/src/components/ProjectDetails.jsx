@@ -3,6 +3,7 @@ import { showProject } from '../services/project'
 import { createTask, destroyTask, updateTask } from '../services/task'
 import TaskList from './TaskList'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default class ProjectDetails extends React.Component {
@@ -15,9 +16,10 @@ export default class ProjectDetails extends React.Component {
       collaborators: [],
       tasks: [],
       taskName: {
-        name: ''
+        name: '',
+        isCompleted: false
       },
-      idEdit: null
+      isEdit: null
     }
   }
 
@@ -46,33 +48,45 @@ export default class ProjectDetails extends React.Component {
 
     }))
   }
+
   handleTaskSubmit = async (ev) => {
     ev.preventDefault();
     await this.handleCreateTask(this.props.id, this.state.taskName)
-    // debugger;
     
     this.setState({
       taskName: {
-        name: ''
+        name: '',
+        isCompleted: false
       }
     })
   }
+
   handleChange = ev => {
     const { target: { name, value } } = ev;
     this.setState(prevState => ({
       taskName: {
         ...prevState.taskName,
-        [name]: value,
+        [name]: value       
+      }
+    }));
+  }
+
+  handleCheckBoxChange = ev => {
+    // const { isCompleted, value } = ev.target;
+    this.setState(prevState => ({
+      taskName: {
+        ...prevState.taskName,
+        isCompleted: !prevState.taskName.isCompleted,
       }
     }));
   }
   edit = (taskId) => {
     // const taskId = ev.target.name
     this.setState(prevState => {
-      const { name } = prevState.tasks.find(task => task.id === taskId);
+      const { name,isCompleted } = prevState.tasks.find(task => task.id === taskId);
       return {
         taskName:
-          { name },
+          { name , isCompleted}
       };
     });
   }
@@ -85,11 +99,12 @@ export default class ProjectDetails extends React.Component {
       isEdit: true,
       taskName: {
         name: currentTask.name,
+        isCompleted: currentTask.isCompleted
       },
       editingId: currentTask.id
     });
   }
-  // update = async () => {
+  
 
 
 
@@ -101,8 +116,9 @@ export default class ProjectDetails extends React.Component {
     this.setState(prevState => ({
       tasks: prevState.tasks.map(task => task.id === resp.id ? resp : task),
       taskName: {
-        name: ''
+        name: '',  
       },
+      isEdit: false
     }))
 
 
@@ -138,9 +154,40 @@ export default class ProjectDetails extends React.Component {
                 value={this.state.taskName.name}
                 onChange={this.handleChange}
                 name="name"
-              ></input>
+            ></input>
+            <br />
+            {this.state.taskName.isCompleted ? <>
+              <FontAwesomeIcon 
+                style={{color:"green"}}
+                className="task-icon"
+                icon="check-circle"
+                title="Completed" />{" "}
+              Complete
+            </> 
+              
+              :
+              <>
+                <FontAwesomeIcon
+                  style={{ color: "red" }}
+                  className="task-icon"
+                  icon="times"
+                  title="Incomplete"
+                />{" "}
+              Incomplete
+              </>}
+            
+            <input
+              type="checkbox"
+              checked={this.state.taskName.isCompleted}
+              onChange={this.handleCheckBoxChange}
+              name="isCompleted"
+            />
+              
+          
               <input type="submit" value="Update"></input>
             </form>}
+          
+          
           {!this.state.isEdit &&
             <form onSubmit={this.handleTaskSubmit}>
               <input
@@ -148,8 +195,10 @@ export default class ProjectDetails extends React.Component {
                 value={this.state.taskName.name}
                 onChange={this.handleChange}
                 name="name"
-              ></input>
-              <input  type="submit" value="Add a task"></input>
+                required
+            ></input>
+            
+              <input  type="submit" value="Add a task" ></input>
             </form>}
         
         <TaskList projectId={this.props.id} tasks={this.state.tasks} handleDelete={this.handleDeleteTask} handleUpdate={this.handleUpdate} edit={this.edit} />

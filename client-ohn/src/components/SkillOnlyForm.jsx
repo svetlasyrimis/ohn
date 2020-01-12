@@ -22,7 +22,7 @@ export default class SkillOnlyForm extends React.Component {
     ev.preventDefault();
     const { id } = this.props.currentUser;
     ev.preventDefault();
-    // debugger
+
     this.props.handleSubmit(id, this.state);
 
     this.setState({

@@ -16,7 +16,7 @@ const ProjectListSearch = props => {
             handleDelete={props.handleDelete}
             currentUser={props.currentUser}
             becomeCollaborator={props.becomeCollaborator}
-
+            collabFor={props.collabFor}
           ></ProjectFlippingCard>
           {/* <Link to></Link> */}
 

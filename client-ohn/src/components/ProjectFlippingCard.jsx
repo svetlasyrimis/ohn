@@ -59,6 +59,7 @@ class ProjectFlippingCard extends React.Component {
         <ProjectCardBack
           key="back"
           date={this.props.date}
+          collabFor={this.props.collabFor}
           handleClick={this.handleClick}
           project={this.state.project}
           handleAdd={this.handleAdd}

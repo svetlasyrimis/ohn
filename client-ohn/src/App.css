@@ -347,6 +347,15 @@ input {
   padding: 5px;
 }
 
+.task-icon {
+  cursor: default;
+  font-size: 1.2em;
+}
+
+.task-icon:hover {
+  border: 0
+}
+
 /* .fa-spin {
   -webkit-animation: fa-spin 0.75s infinite linear !important;
   animation: fa-spin 0.75s infinite linear !important;
