@@ -57,7 +57,6 @@ class ProjectsController < ApplicationController
   end
 
   def remove_collaborator 
-    # debugger
     collaborator =  @project.collaborators.find do |collaborator|
       collaborator.isOwner == false && collaborator.user_id == @current_user.id 
     end 

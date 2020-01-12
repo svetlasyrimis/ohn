@@ -12,7 +12,7 @@ Not too long ago, it occurred to me that many people underestimate their compete
 
 ### Project Description:
 
-DreamMaker is a crowdsourcing, multidisciplinary app that connects individuals with free time and passion to create new tangible products. The basis for the idea comes from the belief that people with different skills, but with similar interests and hobbies, can collaborate towards a common goal of ultimately creating a product of their choice. The user, whose role can be an inventor or either worker, can choose to participate in others’ projects or create a project of his/her own which others can join and complete tasks. 
+OHN is a crowdsourcing, multidisciplinary app that connects individuals with free time and passion to create new tangible products. The basis for the idea comes from the belief that people with different skills, but with similar interests and hobbies, can collaborate towards a common goal of ultimately creating a product of their choice. The user, whose role can be an inventor or either worker, can choose to participate in others’ projects or create a project of his/her own which others can join and complete tasks. 
 
 ## Feature List :
 
